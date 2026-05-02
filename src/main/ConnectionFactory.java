@@ -1,7 +1,7 @@
-import java.net.ConnectException;
+package main;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import javax.swing.JOptionPane;
 
 public class ConnectionFactory {
     public static Connection getConnection() throws Exception{
@@ -19,7 +19,6 @@ public class ConnectionFactory {
     public static void main(String[] args) throws Exception{
         try{
             Connection connect = ConnectionFactory.getConnection();
-
         } catch (Exception e){
             e.printStackTrace();
         }
