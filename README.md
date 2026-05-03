@@ -43,7 +43,7 @@ sql sistema_academico
 
 Execute o arquivo:
 
-01_banco.sql
+`01_banco.sql`
 
 em seu MySQL para criar toda a estrutura e dados de teste.
 
