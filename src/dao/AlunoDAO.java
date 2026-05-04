@@ -1,7 +1,6 @@
 package dao;
 
 import models.Aluno;
-import models.Leitor;
 import main.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
