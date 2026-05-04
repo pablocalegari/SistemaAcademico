@@ -25,8 +25,8 @@ public class AlunoDAO {
 
     public void salvar(Aluno Aluno) throws Exception{
         try{
-            String sql = "INSERT INTO aluno(nome , rgm , cpf, data_nascimento, email, celular , endereco)" +
-                    "values (?, ?, ?)";
+            String sql = "INSERT INTO aluno(nome , rgm , cpf, data_nascimento, email, celular , endereco, curso_id)" +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?);";
             // passa a query para executar no banco de dados
             preparedStatement = connection.prepareStatement(sql);
 
@@ -38,6 +38,7 @@ public class AlunoDAO {
             preparedStatement.setString(5, aluno.getEmail());
             preparedStatement.setInt(6, aluno.getNumeroCelular());
             preparedStatement.setString(7, aluno.getEndereco());
+            preparedStatement.setInt(8, aluno.getCurso());
             
             // executando a query no banco
             preparedStatement.executeUpdate();
@@ -48,7 +49,7 @@ public class AlunoDAO {
 
     public List listar() throws Exception{
         List<Aluno> lista = new ArrayList<Aluno>();
-        String sql = "SELECT * FROM aluno";
+        String sql = "SELECT * FROM aluno;";
         preparedStatement = connection.prepareStatement(sql);
         try{
             preparedStatement = connection.prepareStatement(sql);
@@ -72,6 +73,14 @@ public class AlunoDAO {
             throw new Exception(">> ERRO AO LISTAR DADOS->" + e.getMessage());
         }
     }
+
+    //public void atualizar()throws Exception{
+    //    try{
+    //        String sql = "UPDATE aluno SET blablabla WHERE rgm = ?;";
+    //    } catch(Exception e){
+    //        throw new Exception(">> ERRO AO ALTERAR DADO -> " + e.getMessage());
+    //    }
+    //}
 
     public void deletar() throws Exception{
         try{
