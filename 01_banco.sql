@@ -16,7 +16,7 @@ CREATE TABLE curso(
     cpf VARCHAR(14) NOT NULL UNIQUE,
     data_nascimento DATE,
     email VARCHAR(100),
-    celular VARCHAR(20),
+    celular VARCHAR(16),
     endereco VARCHAR(50),
     curso_id INT,
     FOREIGN KEY (curso_id) REFERENCES curso(id)
