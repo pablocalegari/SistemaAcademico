@@ -31,7 +31,7 @@ CREATE TABLE nota (
     aluno_id INT,
     disciplina VARCHAR(100),
 	semestre VARCHAR(10),
-    nota DECIMAL(4, 2) CHECK (nota BETWEEN 0 AND 10)
+    nota DECIMAL(4, 2) CHECK (nota BETWEEN 0 AND 10),
     faltas INT,
 	
     FOREIGN KEY(aluno_id) REFERENCES aluno(id)
@@ -46,13 +46,16 @@ INSERT INTO curso (nome, campus, periodo) VALUES
 ('Engenharia', 'Mooca', 'Matutino');
 
 -- Alunos
-INSERT INTO aluno (nome, rgm, cpf, data_nascimento, email, celular, endereco, curso_id) VALUES
-('joao Frango', '12345', '111.111.111-11', '2003-05-10', 'joao@email.com', '11999999999', 'Rua A', 1),
-('Maria Betania', '67890', '222.222.222-22', '2002-08-15', 'maria@email.com', '11888888888', 'Rua B', 2);
+INSERT INTO aluno 
+(nome, rgm, cpf, data_nascimento, email, celular, endereco, municipio, uf, curso_id) 
+VALUES
+('Joao Frango', '12345', '111.111.111-11', '2003-05-10', 'joao@email.com', '(11)99999-9999', 'Rua A', 'São Paulo', 'SP', 1),
+('Maria Betania', '67890', '222.222.222-22', '2002-08-15', 'maria@email.com', '(11)98888-8888', 'Rua B', 'São Paulo', 'SP', 2);
+
 
 -- Notas
-INSERT INTO nota (aluno_id, disciplina, nota, faltas) VALUES
-(1, 'POO', 8.5, 2),
-(1, 'Banco de Dados', 7.0, 3),
-(2, 'POO', 9.0, 1),
-(2, 'Algoritmos', 8.0, 0);
+INSERT INTO nota (aluno_id, disciplina, semestre, nota, faltas) VALUES
+(1, 'POO', '2020-1', 8.5, 2),
+(1, 'Banco de Dados', '2020-1', 7.0, 3),
+(2, 'POO', '2020-1', 9.0, 1),
+(2, 'Algoritmos', '2020-1', 8.0, 0);
