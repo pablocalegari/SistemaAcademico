@@ -45,14 +45,17 @@ CREATE TABLE nota (
 -- Cursos
 INSERT INTO curso (nome, campus, periodo) VALUES
 ('ADS', 'Tatuapé', 'Noturno'),
-('Engenharia', 'Mooca', 'Matutino');
+('Engenharia', 'Mooca', 'Matutino'),
+('Direito', 'Lapa', 'Noturno'),     
+('Medicina', 'Santana', 'Integral'),  
+('Arquitetura', 'Centro', 'Matutino'); 
 
 -- Alunos
 INSERT INTO aluno 
 (nome, genero, rgm, cpf, data_nascimento, email, celular, endereco, municipio, uf, curso_id) 
 VALUES
 ('Joao Frango', 'Masculino', '12345', '111.111.111-11', '2003-05-10', 'joao@email.com', '(11)99999-9999', 'Rua A', 'São Paulo', 'SP', 1),
-('Maria Betania', 'Transgenero', '67890', '222.222.222-22', '2002-08-15', 'maria@email.com', '(11)98888-8888', 'Rua B', 'São Paulo', 'SP', 2);
+('Maria Betania', 'Transgenero', '67890', '222.222.222-22', '2002-08-15', 'maria@email.com', '(11)98888-8888', 'Rua B', 'São Paulo', 'SP', 2),
 ('Bia Miranda', 'Feminino', '24680', '333.333.333-33', '2001-03-22', 'bimiranda@email.com', '(21)97777-7777', 'Av. Alamedas', 'Rio de Janeiro', 'RJ', 1),
 ('Harry Potter', 'Masculino', '13579', '444.444.444-44', '2004-12-05', 'ehohpne@email.com', '(31)96666-6666', 'Rua dos Alfeneiros', 'Belo Horizonte', 'MG', 3),
 ('Michael Jackson', 'Masculino', '11223', '555.555.555-55', '1999-07-30', 'rusbe@email.com', '(41)95555-5555', 'Rua Billie Jean', 'Curitiba', 'PR', 2),
