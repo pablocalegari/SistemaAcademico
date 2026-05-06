@@ -31,7 +31,7 @@ CREATE TABLE nota (
     aluno_id INT,
     disciplina VARCHAR(100),
 	semestre VARCHAR(10),
-    nota DECIMAL(4, 2), CHECK (nota BETWEEN 0 AND 10)
+    nota DECIMAL(4, 2) CHECK (nota BETWEEN 0 AND 10)
     faltas INT,
 	
     FOREIGN KEY(aluno_id) REFERENCES aluno(id)
