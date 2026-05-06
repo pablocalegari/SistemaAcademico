@@ -12,6 +12,7 @@ CREATE TABLE curso(
  CREATE TABLE aluno (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	nome VARCHAR(100) NOT NULL,
+	genero VARCHAR (50),
     rgm VARCHAR(20) NOT NULL UNIQUE,
     cpf VARCHAR(14) NOT NULL UNIQUE,
     data_nascimento DATE,
@@ -20,6 +21,7 @@ CREATE TABLE curso(
     endereco VARCHAR(150),
 	municipio VARCHAR(100),
 	uf CHAR(2),
+	
 	
     curso_id INT,
     FOREIGN KEY (curso_id) REFERENCES curso(id)
@@ -47,11 +49,18 @@ INSERT INTO curso (nome, campus, periodo) VALUES
 
 -- Alunos
 INSERT INTO aluno 
-(nome, rgm, cpf, data_nascimento, email, celular, endereco, municipio, uf, curso_id) 
+(nome, genero, rgm, cpf, data_nascimento, email, celular, endereco, municipio, uf, curso_id) 
 VALUES
-('Joao Frango', '12345', '111.111.111-11', '2003-05-10', 'joao@email.com', '(11)99999-9999', 'Rua A', 'São Paulo', 'SP', 1),
-('Maria Betania', '67890', '222.222.222-22', '2002-08-15', 'maria@email.com', '(11)98888-8888', 'Rua B', 'São Paulo', 'SP', 2);
-
+('Joao Frango', 'Masculino', '12345', '111.111.111-11', '2003-05-10', 'joao@email.com', '(11)99999-9999', 'Rua A', 'São Paulo', 'SP', 1),
+('Maria Betania', 'Transgenero', '67890', '222.222.222-22', '2002-08-15', 'maria@email.com', '(11)98888-8888', 'Rua B', 'São Paulo', 'SP', 2);
+('Bia Miranda', 'Feminino', '24680', '333.333.333-33', '2001-03-22', 'bimiranda@email.com', '(21)97777-7777', 'Av. Alamedas', 'Rio de Janeiro', 'RJ', 1),
+('Harry Potter', 'Masculino', '13579', '444.444.444-44', '2004-12-05', 'ehohpne@email.com', '(31)96666-6666', 'Rua dos Alfeneiros', 'Belo Horizonte', 'MG', 3),
+('Michael Jackson', 'Masculino', '11223', '555.555.555-55', '1999-07-30', 'rusbe@email.com', '(41)95555-5555', 'Rua Billie Jean', 'Curitiba', 'PR', 2),
+('Gustavo Lima', 'Masculino', '44556', '666.666.666-66', '2002-01-14', 'oembaixador@email.com', '(61)94444-4444', 'Rua Tchecherere', 'Brasília', 'DF', 4),
+('Ayrton Senna', 'Masculino', '77889', '777.777.777-77', '2003-09-18', 'monacos2@email.com', '(71)93333-3333', 'Rua do Laranjinha', 'Salvador', 'BA', 1),
+('Babu Santana', 'Masculino', '99001', '888.888.888-88', '2000-06-25', 'ahbabuuuu@email.com', '(85)92222-2222', 'Rua Branquinha', 'Fortaleza', 'CE', 3),
+('Pablo Vittar', 'Outro', '22334', '999.999.999-99', '2005-02-10', 'iledile@email.com', '(51)91111-1111', 'Rua dos Homossapiens', 'Porto Alegre', 'RS', 2),
+('Neymar da Silva', 'Prefiro não informar', '55667', '000.000.000-00', '2001-11-28', 'vemhexa@email.com', '(11)91234-5678', 'Av. Volta pro Barça', 'São Paulo', 'SP', 5);
 
 -- Notas
 INSERT INTO nota (aluno_id, disciplina, semestre, nota, faltas) VALUES
