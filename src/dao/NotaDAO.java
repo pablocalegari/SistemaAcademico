@@ -67,9 +67,9 @@ public class NotaDAO {
             String sql = "DELETE FROM nota WHERE aluno_id = ?;";
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.set
+            //preparedStatement.set
 
-            preparedStatement.executeUpdate();
+            //preparedStatement.executeUpdate();
         } catch (Exception e){
             throw new Exception(">> ERRO AO EXCLUIR ->" + e.getMessage());
         }
