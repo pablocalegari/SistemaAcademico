@@ -17,17 +17,23 @@ CREATE TABLE curso(
     data_nascimento DATE,
     email VARCHAR(100),
     celular VARCHAR(16),
-    endereco VARCHAR(50),
+    endereco VARCHAR(150),
+	municipio VARCHAR(100),
+	uf CHAR(2),
+	
     curso_id INT,
     FOREIGN KEY (curso_id) REFERENCES curso(id)
+	 ON DELETE SET NULL
    );
    
 CREATE TABLE nota (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     aluno_id INT,
     disciplina VARCHAR(100),
-    nota DECIMAL(5, 2),
+	semestre VARCHAR(10),
+    nota DECIMAL(4, 2), CHECK (nota BETWEEN 0 AND 10)
     faltas INT,
+	
     FOREIGN KEY(aluno_id) REFERENCES aluno(id)
     ON DELETE CASCADE
 );
