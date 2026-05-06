@@ -1,20 +1,20 @@
 package models;
 
-import java.sql.Date;
-
-import javafx.scene.chart.PieChart.Data;
+import java.util.Date;
 
 public class Aluno {
-    private int rgm;
+    private String rgm;
     private String nome;
     private int curso;
     private String cpf;
-    private int numeroCelular;
+    private String numeroCelular;
     private String email;
     private Date dataNascimento;
     private String endereco;
+    private String municipio;
+    private String uf;
 
-    public Aluno(int rgm, String nome, int curso, String cpf, int numeroCelular, String email, java.util.Date dataNascimento2, String endereco){
+    public Aluno(String rgm, String nome, int curso, String cpf, String numeroCelular, String email, java.util.Date dataNascimento, String endereco, String municipio, String uf) {
         this.rgm = rgm;
         this.nome = nome;
         this.curso = curso;
@@ -23,12 +23,14 @@ public class Aluno {
         this.email = email;
         this.dataNascimento = dataNascimento;
         this.endereco = endereco;
+        this.municipio = municipio;
+        this.uf = uf;
     }
 
-    public int getRgm() {
+    public String getRgm() {
         return rgm;
     }
-    public void setRgm(int rgm) {
+    public void setRgm(String rgm) {
         this.rgm = rgm;
     }
     
@@ -74,10 +76,24 @@ public class Aluno {
         this.endereco = endereco;
     }
 
-    public int getNumeroCelular() {
+    public String getNumeroCelular() {
         return numeroCelular;
     }
-    public void setNumeroCelular(int numeroCelular) {
+    public void setNumeroCelular(String numeroCelular) {
         this.numeroCelular = numeroCelular;
+    }
+
+    public String getMunicipio() {
+        return municipio;
+    }
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 }

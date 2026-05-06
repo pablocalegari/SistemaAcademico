@@ -25,21 +25,24 @@ public class AlunoDAO {
 
     public void salvar(Aluno Aluno) throws Exception{
         try{
-            String sql = "INSERT INTO aluno(nome , rgm , cpf, data_nascimento, email, celular , endereco, curso_id)" +
-                    "values (?, ?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO aluno(nome , rgm , cpf, data_nascimento, email, celular , endereco, curso_id, municipio, uf)" +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             // passa a query para executar no banco de dados
             preparedStatement = connection.prepareStatement(sql);
+            // passando do tipo de Date do java.util para o tipo de Date do java.sql, que é o que o banco de dados aceita
+            java.sql.Date dataNascimento = new java.sql.Date(aluno.getDataNascimento().getTime());
 
             // passando os valores do codigo, nome, e tipo para os (?, ?, ?) da query
             preparedStatement.setString(1, aluno.getNome());
-            preparedStatement.setInt(2, aluno.getRgm());
+            preparedStatement.setString(2, aluno.getRgm());
             preparedStatement.setString(3, aluno.getCpf());
-            preparedStatement.setDate(4, aluno.getDataNascimento());
+            preparedStatement.setDate(4, dataNascimento);
             preparedStatement.setString(5, aluno.getEmail());
-            preparedStatement.setInt(6, aluno.getNumeroCelular());
+            preparedStatement.setString(6, aluno.getNumeroCelular());
             preparedStatement.setString(7, aluno.getEndereco());
             preparedStatement.setInt(8, aluno.getCurso());
-            
+            preparedStatement.setString(9, aluno.getMunicipio());
+            preparedStatement.setString(10, aluno.getUf());
             // executando a query no banco
             preparedStatement.executeUpdate();
         } catch (Exception e){
@@ -58,15 +61,17 @@ public class AlunoDAO {
             while(resultSet.next()){
                 // pegando os do banco de dados e passando para as variaveis
                 String nome = resultSet.getString("nome");
-                int rgm = resultSet.getInt("rgm");
+                String rgm = resultSet.getString("rgm");
                 String cpf = resultSet.getString("cpf");
                 Date dataNascimento = resultSet.getDate("data_nascimento");
                 String email = resultSet.getString("email");
-                int numeroCelular = resultSet.getInt("celular");
+                String numeroCelular = resultSet.getString("celular");
                 String endereco =  resultSet.getString("endereco");
                 int curso = resultSet.getInt("curso_id");
+                String municipio = resultSet.getString("municipio");
+                String uf = resultSet.getString("uf");
 
-                lista.add(new Aluno(rgm,nome,curso,cpf,numeroCelular,email,dataNascimento,endereco));
+                lista.add(new Aluno(rgm,nome,curso,cpf,numeroCelular,email,dataNascimento,endereco,municipio,uf));
             }
             return lista;
         } catch (Exception e){
@@ -86,11 +91,11 @@ public class AlunoDAO {
         try{
             String sql = "DELETE FROM aluno WHERE rgm = ?";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, aluno.getRgm());
+            preparedStatement.setString(1, aluno.getRgm());
             int isAlunoExistent = preparedStatement.executeUpdate();
 
             if (isAlunoExistent == 0){
-                System.out.println(">> ALERTA -> RMG não encontrado");
+                System.out.println(">> ALERTA -> RGM não encontrado");
             }
         } catch (Exception e){
             throw new Exception(">> ERRO AO DELETAR ->" + e.getMessage());
