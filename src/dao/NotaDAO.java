@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class NotaDAO {
@@ -33,11 +32,10 @@ public class NotaDAO {
             preparedStatement.setString(2, nota.getSemestre());
             preparedStatement.setDouble(3, nota.getNota());
             preparedStatement.setInt(4, nota.getFalta());
-
+            preparedStatement.setInt(5, nota.getAlunoId());
             preparedStatement.executeUpdate();
         } catch(Exception e){
             throw new Exception(">> ERRO AO SALVAR ->" + e.getMessage());
-
         }
     }
 
@@ -53,8 +51,9 @@ public class NotaDAO {
                 String semestre = resultSet.getString("semestre");
                 double notaAluno = resultSet.getDouble("nota");
                 int falta = resultSet.getInt("faltas");
+                int alunoId = resultSet.getInt("aluno_id");
 
-                lista.add(new Nota(notaAluno, disciplina, falta, semestre));
+                lista.add(new Nota(notaAluno, disciplina, falta, semestre, alunoId));
             }
             return lista;
         } catch (Exception e){
@@ -67,9 +66,9 @@ public class NotaDAO {
             String sql = "DELETE FROM nota WHERE aluno_id = ?;";
             preparedStatement = connection.prepareStatement(sql);
 
-            //preparedStatement.set
+            preparedStatement.setInt(1, nota.getAlunoId());
 
-            //preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
         } catch (Exception e){
             throw new Exception(">> ERRO AO EXCLUIR ->" + e.getMessage());
         }

@@ -3,6 +3,8 @@ package main;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import components.Janela1;
+
 public class ConnectionFactory {
     public static Connection getConnection() throws Exception{
         try{
@@ -19,6 +21,8 @@ public class ConnectionFactory {
     public static void main(String[] args) throws Exception{
         try{
             Connection connect = ConnectionFactory.getConnection();
+            Janela1 janelaPrincipal = new Janela1();
+            
         } catch (Exception e){
             e.printStackTrace();
         }

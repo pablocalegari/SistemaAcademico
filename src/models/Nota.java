@@ -5,13 +5,14 @@ public class Nota {
     private String disciplina;
     private int falta;
     private String semestre;
-    // private int alunoId;
+    private int alunoId;
 
-    public Nota(double nota, String disciplina, int falta, String semestre){
+    public Nota(double nota, String disciplina, int falta, String semestre, int alunoId) {
         this.nota = nota;
         this.disciplina = disciplina;
         this.falta = falta;
         this.semestre = semestre;
+        this.alunoId = alunoId;
     }
 
     public double getNota() {
@@ -39,5 +40,11 @@ public class Nota {
     }
     public void setSemestre(String semestre) {
         this.semestre = semestre;
+    }
+    public int getAlunoId() {
+        return alunoId;
+    }
+    public void setAlunoId(int alunoId) {
+        this.alunoId = alunoId;
     }
 }
