@@ -23,7 +23,7 @@ public class AlunoDAO {
         }
     }
 
-    public void salvar(Aluno Aluno) throws Exception{
+    public void salvar(Aluno aluno) throws Exception{
         try{
             String sql = "INSERT INTO aluno(nome , rgm , cpf, data_nascimento, email, celular , endereco, curso_id, municipio, uf)" +
                     "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";

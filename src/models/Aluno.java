@@ -13,7 +13,11 @@ public class Aluno {
     private String endereco;
     private String municipio;
     private String uf;
+   
+    public Aluno() {
 
+    }
+    
     public Aluno(String rgm, String nome, int curso, String cpf, String numeroCelular, String email, java.util.Date dataNascimento, String endereco, String municipio, String uf) {
         this.rgm = rgm;
         this.nome = nome;
