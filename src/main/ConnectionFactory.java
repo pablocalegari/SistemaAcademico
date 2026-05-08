@@ -10,7 +10,7 @@ public class ConnectionFactory {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             String login = "root";
-            String senha = "Impressor@s1";
+            String senha = "";
             String url = "jdbc:mysql://localhost:3306/sistema_academico";
             return DriverManager.getConnection(url, login, senha);
         } catch (Exception e){
