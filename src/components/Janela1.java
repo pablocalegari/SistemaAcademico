@@ -13,6 +13,8 @@ import java.awt.*;
 import dao.AlunoDAO;
 import models.Aluno;
 import java.text.SimpleDateFormat;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Janela1 extends JFrame {
 
@@ -231,6 +233,60 @@ public class Janela1 extends JFrame {
         });
         cbGenero.setBounds(80, rowY[5], 180, fieldH);
         panelDadosPessoais.add(cbGenero);
+        
+        JButton btnNewButton = new JButton("Salvar");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 29));
+        btnNewButton.addActionListener(new ActionListener() {
+        	
+        	
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+                    Aluno aluno = new Aluno();
+                    aluno.setRgm(txtRGM.getText());
+                    aluno.setNome(txtNome.getText());
+                    aluno.setCpf(txtCPF.getText());
+                    aluno.setEmail(txtEmail.getText());
+                    aluno.setEndereco(txtEndereco.getText());
+                    aluno.setMunicipio(txtMunicipio.getText());
+                    aluno.setUf(cbUF.getSelectedItem().toString());
+                    aluno.setNumeroCelular(txtCelular.getText());
+
+                    // curso exemplo
+                    aluno.setCurso(1);
+
+                    // convertendo data
+                    SimpleDateFormat sdf =
+                            new SimpleDateFormat("dd/MM/yyyy");
+
+                    java.util.Date data =
+                            sdf.parse(txtDataNascimento.getText());
+
+                    aluno.setDataNascimento(data);
+
+                    // DAO
+                    AlunoDAO dao = new AlunoDAO();
+
+                    // salva no banco
+                    dao.salvar(aluno);
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Aluno salvo com sucesso!"
+                    );
+
+                } catch (Exception ex) {
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Erro: " + ex.getMessage()
+                    );
+
+                    ex.printStackTrace();
+                }
+        	}
+        });
+        btnNewButton.setBounds(523, 302, 262, 69);
+        panelDadosPessoais.add(btnNewButton);
 
         // ── Aba Curso ──
         JPanel panelCurso = new JPanel();
