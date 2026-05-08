@@ -44,7 +44,7 @@ public class NotaDAO {
     public List listar() throws Exception{
         List<Nota> lista = new ArrayList<Nota>();
         String sql = "SELECT * FROM nota;";
-        preparedStatement = connection.prepareStatement(sql);
+        
         try{
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
