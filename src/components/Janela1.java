@@ -61,53 +61,7 @@ public class Janela1 extends JFrame {
         JMenu mnAluno = new JMenu("Aluno");
         menuBar.add(mnAluno);
         
-        JMenuItem itemSalvar = new JMenuItem("Salvar");
-        mnAluno.add(itemSalvar);
-        itemSalvar.addActionListener(e -> {
-            try {
-                Aluno aluno = new Aluno();
-                aluno.setRgm(txtRGM.getText());
-                aluno.setNome(txtNome.getText());
-                aluno.setCpf(txtCPF.getText());
-                aluno.setEmail(txtEmail.getText());
-                aluno.setEndereco(txtEndereco.getText());
-                aluno.setMunicipio(txtMunicipio.getText());
-                aluno.setUf(cbUF.getSelectedItem().toString());
-                aluno.setNumeroCelular(txtCelular.getText());
 
-                // curso exemplo
-                aluno.setCurso(1);
-
-                // convertendo data
-                SimpleDateFormat sdf =
-                        new SimpleDateFormat("dd/MM/yyyy");
-
-                java.util.Date data =
-                        sdf.parse(txtDataNascimento.getText());
-
-                aluno.setDataNascimento(data);
-
-                // DAO
-                AlunoDAO dao = new AlunoDAO();
-
-                // salva no banco
-                dao.salvar(aluno);
-
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Aluno salvo com sucesso!"
-                );
-
-            } catch (Exception ex) {
-
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Erro: " + ex.getMessage()
-                );
-
-                ex.printStackTrace();
-            }
-        });
         
         mnAluno.add(new JMenuItem("Alterar"));
         mnAluno.add(new JMenuItem("Consultar"));
