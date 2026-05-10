@@ -33,6 +33,8 @@ public class Janela1 extends JFrame {
     private JComboBox<String> cbUF;
     private JFormattedTextField txtCelular;
     private JComboBox<String> cbGenero;
+    private JTextField txtNota;
+    private JTextField txtMostraraFaltasDo;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -359,23 +361,21 @@ public class Janela1 extends JFrame {
      lblNota.setBounds(190, 150, 35, labelH);
      panelNotas.add(lblNota);
 
-     JComboBox<String> cbNota = new JComboBox<>(new String[]{
-         "0,0","0,5","1,0","1,5","2,0","2,5","3,0","3,5",
-         "4,0","4,5","5,0","5,5","6,0","6,5","7,0","7,5",
-         "8,0","8,5","9,0","9,5","10,0"
-     });
-     cbNota.setSelectedItem("0,5");
-     cbNota.setBounds(228, 147, 70, fieldH);
-     panelNotas.add(cbNota);
-
      JLabel lblFaltas = new JLabel("Faltas");
-     lblFaltas.setBounds(315, 150, 40, labelH);
+     lblFaltas.setBounds(370, 150, 40, labelH);
      panelNotas.add(lblFaltas);
-
-     JTextField txtFaltas = new JTextField();
-     txtFaltas.setDocument(new ApenasNumeros(3));
-     txtFaltas.setBounds(358, 147, 80, fieldH);
-     panelNotas.add(txtFaltas);
+     
+     txtNota = new JTextField("Mostrara a nota do aluno");
+     txtNota.setForeground(Color.BLACK);
+     txtNota.setEditable(false);
+     txtNota.setBounds(229, 147, 128, 28);
+     panelNotas.add(txtNota);
+     
+     txtMostraraFaltasDo = new JTextField("Mostrara Faltas do aluno");
+     txtMostraraFaltasDo.setForeground(Color.BLACK);
+     txtMostraraFaltasDo.setEditable(false);
+     txtMostraraFaltasDo.setBounds(412, 147, 128, 28);
+     panelNotas.add(txtMostraraFaltasDo);
         tabbedPane.addTab("Boletim", null, new JPanel(), null);
     }
 
