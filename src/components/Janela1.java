@@ -1,5 +1,6 @@
 package components;
 
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ import models.Aluno;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.text.MaskFormatter;
 
 public class Janela1 extends JFrame {
 
@@ -23,13 +25,13 @@ public class Janela1 extends JFrame {
 
     private JTextField txtRGM;
     private JTextField txtNome;
-    private JTextField txtDataNascimento;
-    private JTextField txtCPF;
+    private JFormattedTextField txtDataNascimento;
+    private JFormattedTextField txtCPF;
     private JTextField txtEmail;
     private JTextField txtEndereco;
     private JTextField txtMunicipio;
     private JComboBox<String> cbUF;
-    private JTextField txtCelular;
+    private JFormattedTextField txtCelular;
     private JComboBox<String> cbGenero;
 
     public static void main(String[] args) {
@@ -45,7 +47,7 @@ public class Janela1 extends JFrame {
         });
     }
 
-    public Janela1() {
+    public Janela1() throws Exception {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 826, 477);
 
@@ -118,16 +120,15 @@ public class Janela1 extends JFrame {
         lblDataNasc.setBounds(marginX, rowY[1] + 3, 135, labelH);
         panelDadosPessoais.add(lblDataNasc);
 
-        txtDataNascimento = new JTextField();
+        txtDataNascimento = new JFormattedTextField(new MaskFormatter("##/##/####"));
         txtDataNascimento.setBounds(160, rowY[1], 130, fieldH);
         panelDadosPessoais.add(txtDataNascimento);
 
         JLabel lblCPF = new JLabel("CPF");
         lblCPF.setBounds(310, rowY[1] + 3, 35, labelH);
         panelDadosPessoais.add(lblCPF);
-
-        txtCPF = new JTextField();
-        txtCPF.setDocument(new ApenasNumeros(11));
+       
+        txtCPF = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
         txtCPF.setBounds(348, rowY[1], 180, fieldH);
         panelDadosPessoais.add(txtCPF);
 
@@ -173,8 +174,7 @@ public class Janela1 extends JFrame {
         lblCelular.setBounds(420, rowY[4] + 3, 50, labelH);
         panelDadosPessoais.add(lblCelular);
 
-        txtCelular = new JTextField();
-        txtCelular.setDocument(new ApenasNumeros(11));
+        txtCelular = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
         txtCelular.setBounds(475, rowY[4], 290, fieldH);
         panelDadosPessoais.add(txtCelular);
 
