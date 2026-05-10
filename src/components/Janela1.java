@@ -188,60 +188,18 @@ public class Janela1 extends JFrame {
         cbGenero.setBounds(80, rowY[5], 180, fieldH);
         panelDadosPessoais.add(cbGenero);
         
-        JButton btnNewButton = new JButton("Salvar");
-        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 29));
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton SalvarDados = new JButton("Salvar");
+        SalvarDados.setFont(new Font("Tahoma", Font.PLAIN, 29));
+        SalvarDados.addActionListener(new ActionListener() {
         	
         	
         	public void actionPerformed(ActionEvent e) {
-        		try {
-                    Aluno aluno = new Aluno();
-                    aluno.setRgm(txtRGM.getText());
-                    aluno.setNome(txtNome.getText());
-                    aluno.setCpf(txtCPF.getText());
-                    aluno.setEmail(txtEmail.getText());
-                    aluno.setEndereco(txtEndereco.getText());
-                    aluno.setMunicipio(txtMunicipio.getText());
-                    aluno.setUf(cbUF.getSelectedItem().toString());
-                    aluno.setNumeroCelular(txtCelular.getText());
-                    aluno.setGenero(cbGenero.getSelectedItem().toString());
-
-                    // curso exemplo
-                    aluno.setCurso(1);
-
-                    // convertendo data
-                    SimpleDateFormat sdf =
-                            new SimpleDateFormat("dd/MM/yyyy");
-
-                    java.util.Date data =
-                            sdf.parse(txtDataNascimento.getText());
-
-                    aluno.setDataNascimento(data);
-
-                    // DAO
-                    AlunoDAO dao = new AlunoDAO();
-
-                    // salva no banco
-                    dao.salvar(aluno);
-
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "Aluno salvo com sucesso!"
-                    );
-
-                } catch (Exception ex) {
-
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "Erro: " + ex.getMessage()
-                    );
-
-                    ex.printStackTrace();
-                }
+        	        // Só navega, sem salvar no banco
+        	        tabbedPane.setSelectedIndex(1);
         	}
         });
-        btnNewButton.setBounds(523, 302, 262, 69);
-        panelDadosPessoais.add(btnNewButton);
+        SalvarDados.setBounds(523, 298, 262, 69);
+        panelDadosPessoais.add(SalvarDados);
 
         // ── Aba Curso ──
         JPanel panelCurso = new JPanel();
@@ -295,6 +253,47 @@ public class Janela1 extends JFrame {
         rbNoturno.setSelected(true);
         grupoPeriodo.add(rbNoturno);
         panelCurso.add(rbNoturno);
+        
+        JButton SalvarAluno = new JButton("Salvar");
+        SalvarAluno.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+                    Aluno aluno = new Aluno();
+
+                    // Dados pessoais
+                    aluno.setRgm(txtRGM.getText());
+                    aluno.setNome(txtNome.getText());
+                    aluno.setCpf(txtCPF.getText());
+                    aluno.setEmail(txtEmail.getText());
+                    aluno.setEndereco(txtEndereco.getText());
+                    aluno.setMunicipio(txtMunicipio.getText());
+                    aluno.setUf(cbUF.getSelectedItem().toString());
+                    aluno.setNumeroCelular(txtCelular.getText());
+                    aluno.setGenero(cbGenero.getSelectedItem().toString());
+
+                    // Dados do curso
+                    aluno.setCurso(cbCurso.getSelectedIndex() + 1);
+
+                    // Data de nascimento
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    aluno.setDataNascimento(sdf.parse(txtDataNascimento.getText()));
+
+                    // Salva no banco
+                    AlunoDAO dao = new AlunoDAO();
+                    dao.salvar(aluno);
+
+                    JOptionPane.showMessageDialog(null, "Aluno salvo com sucesso!");
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+        	}
+        });
+        SalvarAluno.setFont(new Font("Tahoma", Font.PLAIN, 29));
+        SalvarAluno.setBounds(523, 298, 262, 69);       
+
+        panelCurso.add(SalvarAluno);
 
 
      // ── Aba Notas e Faltas ──
