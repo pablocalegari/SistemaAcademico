@@ -204,6 +204,7 @@ public class Janela1 extends JFrame {
                     aluno.setMunicipio(txtMunicipio.getText());
                     aluno.setUf(cbUF.getSelectedItem().toString());
                     aluno.setNumeroCelular(txtCelular.getText());
+                    aluno.setGenero(cbGenero.getSelectedItem().toString());
 
                     // curso exemplo
                     aluno.setCurso(1);

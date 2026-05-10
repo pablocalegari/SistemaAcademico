@@ -13,12 +13,13 @@ public class Aluno {
     private String endereco;
     private String municipio;
     private String uf;
+    private String genero;
    
     public Aluno() {
 
     }
     
-    public Aluno(String rgm, String nome, int curso, String cpf, String numeroCelular, String email, java.util.Date dataNascimento, String endereco, String municipio, String uf) {
+    public Aluno(String rgm, String nome, int curso, String cpf, String numeroCelular, String email, java.util.Date dataNascimento, String endereco, String municipio, String uf, String genero) {
         this.rgm = rgm;
         this.nome = nome;
         this.curso = curso;
@@ -29,6 +30,7 @@ public class Aluno {
         this.endereco = endereco;
         this.municipio = municipio;
         this.uf = uf;
+        this.genero = genero;
     }
 
     public String getRgm() {
@@ -99,5 +101,11 @@ public class Aluno {
     }
     public void setUf(String uf) {
         this.uf = uf;
+    }
+    public String getGenero() {
+        return genero;
+    }
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 }
