@@ -274,7 +274,7 @@ public class Janela1 extends JFrame {
                     aluno.setGenero(cbGenero.getSelectedItem().toString());
 
                     // Dados do curso
-                    aluno.setCurso(cbCurso.getSelectedIndex() + 1);
+                    aluno.setCurso_id(cbCurso.getSelectedIndex() + 1);
 
                     // Data de nascimento
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
