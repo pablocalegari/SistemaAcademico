@@ -40,7 +40,7 @@ public class AlunoDAO {
             preparedStatement.setString(5, aluno.getEmail());
             preparedStatement.setString(6, aluno.getNumeroCelular());
             preparedStatement.setString(7, aluno.getEndereco());
-            preparedStatement.setInt(8, aluno.getCurso());
+            preparedStatement.setInt(8, aluno.getCurso_id());
             preparedStatement.setString(9, aluno.getMunicipio());
             preparedStatement.setString(10, aluno.getUf());
             preparedStatement.setString(11, aluno.getGenero()); 
