@@ -30,9 +30,9 @@ public class Janela1 extends JFrame {
     private JTextField txtEmail;
     private JTextField txtEndereco;
     private JTextField txtMunicipio;
-    private JComboBox<String> UF;
+    private JComboBox<String> cbUF;
     private JFormattedTextField txtCelular;
-    private JComboBox<String> Genero;
+    private JComboBox<String> cbGenero;
     private JTextField txtNota;
     private JTextField txtMostraraFaltasDo;
 
@@ -167,10 +167,10 @@ public class Janela1 extends JFrame {
             "MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN",
             "RS","RO","RR","SC","SP","SE","TO"
         };
-        UF = new JComboBox<>(estados);
-        UF.setSelectedItem("SP");
-        UF.setBounds(333, rowY[4], 70, fieldH);
-        panelDadosPessoais.add(UF);
+        cbUF = new JComboBox<>(estados);
+        cbUF.setSelectedItem("SP");
+        cbUF.setBounds(333, rowY[4], 70, fieldH);
+        panelDadosPessoais.add(cbUF);
 
         JLabel lblCelular = new JLabel("Celular");
         lblCelular.setBounds(420, rowY[4] + 3, 50, labelH);
@@ -184,11 +184,11 @@ public class Janela1 extends JFrame {
         lblGenero.setBounds(marginX, rowY[5] + 3, 55, labelH);
         panelDadosPessoais.add(lblGenero);
 
-        Genero = new JComboBox<>(new String[]{
+        cbGenero = new JComboBox<>(new String[]{
             "Selecione", "Masculino", "Feminino", "Não Binário", "Prefiro Não Informar"
         });
-        Genero.setBounds(80, rowY[5], 180, fieldH);
-        panelDadosPessoais.add(Genero);
+        cbGenero.setBounds(80, rowY[5], 180, fieldH);
+        panelDadosPessoais.add(cbGenero);
         
         JButton SalvarDados = new JButton("Salvar");
         SalvarDados.setFont(new Font("Tahoma", Font.PLAIN, 29));
@@ -262,9 +262,9 @@ public class Janela1 extends JFrame {
                     aluno.setEmail(txtEmail.getText());
                     aluno.setEndereco(txtEndereco.getText());
                     aluno.setMunicipio(txtMunicipio.getText());
-                    aluno.setUf(UF.getSelectedItem().toString());
+                    aluno.setUf(cbUF.getSelectedItem().toString());
                     aluno.setNumeroCelular(txtCelular.getText());
-                    aluno.setGenero(Genero.getSelectedItem().toString());
+                    aluno.setGenero(cbGenero.getSelectedItem().toString());
                     
                     // Dados do curso
                     aluno.setCurso_id(Curso.getSelectedIndex() + 1);
@@ -326,7 +326,7 @@ public class Janela1 extends JFrame {
      lblDisciplina.setBounds(marginX, 105, 65, labelH);
      panelNotas.add(lblDisciplina);
 
-     JComboBox<String> Disciplina = new JComboBox<>(new String[]{
+     JComboBox<String> cbDisciplina = new JComboBox<>(new String[]{
          "Programação Orientada a Objetos",
          "Estrutura de Dados",
          "Banco de Dados",
@@ -334,9 +334,9 @@ public class Janela1 extends JFrame {
          "Redes de Computadores",
          "Sistemas Operacionais"
      });
-     Disciplina.setSelectedIndex(0);
-     Disciplina.setBounds(90, 102, 450, fieldH);
-     panelNotas.add(Disciplina);
+     cbDisciplina.setSelectedIndex(0);
+     cbDisciplina.setBounds(90, 102, 450, fieldH);
+     panelNotas.add(cbDisciplina);
 
      // Linha 4: Semestre, Nota, Faltas
      JLabel lblSemestre = new JLabel("Semestre");
