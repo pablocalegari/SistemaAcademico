@@ -53,12 +53,12 @@ public class Janela1 extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 826, 477);
 
-        // ── Variáveis de layout (declaradas UMA vez) ──
+        //
         int labelH  = 22;
         int fieldH  = 28;
         int marginX = 20;
 
-        // ── Menu Bar ──
+      
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
@@ -82,7 +82,7 @@ public class Janela1 extends JFrame {
 
         menuBar.add(new JMenu("Ajuda"));
 
-        // ── Content Pane ──
+
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
         setContentPane(contentPane);
@@ -93,7 +93,7 @@ public class Janela1 extends JFrame {
         contentPane.add(tabbedPane);
 
 
-        // ── Aba Dados Pessoais ──
+        // Dados Pessoais
 
         JPanel panelDadosPessoais = new JPanel();
         panelDadosPessoais.setLayout(null);
@@ -265,7 +265,7 @@ public class Janela1 extends JFrame {
                     aluno.setUf(cbUF.getSelectedItem().toString());
                     aluno.setNumeroCelular(txtCelular.getText());
                     aluno.setGenero(cbGenero.getSelectedItem().toString());
-
+                    
                     // Dados do curso
                     aluno.setCurso_id(Curso.getSelectedIndex() + 1);
 
@@ -344,10 +344,10 @@ public class Janela1 extends JFrame {
      panelNotas.add(lblSemestre);
 
      
-     JComboBox comboBox = new JComboBox();
-     comboBox.setModel(new DefaultComboBoxModel(new String[] {"2025-1", "2025-2", "2026-1", "2026-2"}));
-     comboBox.setBounds(75, 150, 94, 22);
-     panelNotas.add(comboBox);
+     JComboBox Semestre = new JComboBox();
+     Semestre.setModel(new DefaultComboBoxModel(new String[] {"2025-1", "2025-2", "2026-1", "2026-2"}));
+     Semestre.setBounds(75, 150, 94, 22);
+     panelNotas.add(Semestre);
         tabbedPane.addTab("Boletim", null, new JPanel(), null);
         
      panelNotas.add(Semestre);

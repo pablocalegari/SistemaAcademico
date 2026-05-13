@@ -14,6 +14,8 @@ public class Aluno {
     private String municipio;
     private String uf;
     private String genero;
+    private String campus;
+    private String periodo;
    
     public Aluno() {
     }
