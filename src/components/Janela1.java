@@ -30,9 +30,9 @@ public class Janela1 extends JFrame {
     private JTextField txtEmail;
     private JTextField txtEndereco;
     private JTextField txtMunicipio;
-    private JComboBox<String> UF;
+    private JComboBox<String> cmbUF;
     private JFormattedTextField txtCelular;
-    private JComboBox<String> Genero;
+    private JComboBox<String> cmbGenero;
     private JTextField txtNota;
     private JTextField txtMostraraFaltasDo;
 
@@ -167,10 +167,10 @@ public class Janela1 extends JFrame {
             "MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN",
             "RS","RO","RR","SC","SP","SE","TO"
         };
-        UF = new JComboBox<>(estados);
-        UF.setSelectedItem("SP");
-        UF.setBounds(333, rowY[4], 70, fieldH);
-        panelDadosPessoais.add(UF);
+        cmbUF = new JComboBox<>(estados);
+        cmbUF.setSelectedItem("SP");
+        cmbUF.setBounds(333, rowY[4], 70, fieldH);
+        panelDadosPessoais.add(cmbUF);
 
         JLabel lblCelular = new JLabel("Celular");
         lblCelular.setBounds(420, rowY[4] + 3, 50, labelH);
@@ -184,18 +184,16 @@ public class Janela1 extends JFrame {
         lblGenero.setBounds(marginX, rowY[5] + 3, 55, labelH);
         panelDadosPessoais.add(lblGenero);
 
-        Genero = new JComboBox<>(new String[]{
+        cmbGenero = new JComboBox<>(new String[]{
             "Selecione", "Masculino", "Feminino", "Não Binário", "Prefiro Não Informar"
         });
-        Genero.setBounds(80, rowY[5], 180, fieldH);
-        panelDadosPessoais.add(Genero);
+        cmbGenero.setBounds(80, rowY[5], 180, fieldH);
+        panelDadosPessoais.add(cmbGenero);
         
         JButton SalvarDados = new JButton("Salvar");
         SalvarDados.setFont(new Font("Tahoma", Font.PLAIN, 29));
         SalvarDados.addActionListener(new ActionListener() {
-        	
-        	
-        	public void actionPerformed(ActionEvent e) {
+                	public void actionPerformed(ActionEvent e) {
         	        // Só navega, sem salvar no banco
         	        tabbedPane.setSelectedIndex(1);
         	}
@@ -212,19 +210,19 @@ public class Janela1 extends JFrame {
         lblCurso.setBounds(marginX, 30, 55, labelH);
         panelCurso.add(lblCurso);
         
-        JComboBox Curso = new JComboBox();
-        Curso.setModel(new DefaultComboBoxModel(new String[] {"Analise e Desenvolvimento de Sistema", "Engenharia", "Direito", "Medicina", "Arquitetura"}));
-        Curso.setBounds(90, 30, 455, 22);
-        panelCurso.add(Curso);
+        JComboBox cmbCurso = new JComboBox();
+        cmbCurso.setModel(new DefaultComboBoxModel(new String[] {"Analise e Desenvolvimento de Sistema", "Engenharia", "Direito", "Medicina", "Arquitetura"}));
+        cmbCurso.setBounds(90, 30, 455, 22);
+        panelCurso.add(cmbCurso);
         
         JLabel lblCampus = new JLabel("Campus");
         lblCampus.setBounds(marginX, 80, 55, labelH);
         panelCurso.add(lblCampus);
         
-        JComboBox Campus = new JComboBox();
-        Campus.setModel(new DefaultComboBoxModel(new String[] {"Tatuapé", "Mooca", "Lapa", "Santana", "Centro"}));
-        Campus.setBounds(90, 80, 455, 22);
-        panelCurso.add(Campus);
+        JComboBox cmbCampus = new JComboBox();
+        cmbCampus.setModel(new DefaultComboBoxModel(new String[] {"Tatuapé", "Mooca", "Lapa", "Santana", "Centro"}));
+        cmbCampus.setBounds(90, 80, 455, 22);
+        panelCurso.add(cmbCampus);
 
 
         JLabel lblPeriodo = new JLabel("Período");
@@ -262,12 +260,12 @@ public class Janela1 extends JFrame {
                     aluno.setEmail(txtEmail.getText());
                     aluno.setEndereco(txtEndereco.getText());
                     aluno.setMunicipio(txtMunicipio.getText());
-                    aluno.setUf(UF.getSelectedItem().toString());
+                    aluno.setUf(cmbUF.getSelectedItem().toString());
                     aluno.setNumeroCelular(txtCelular.getText());
-                    aluno.setGenero(Genero.getSelectedItem().toString());
+                    aluno.setGenero(cmbGenero.getSelectedItem().toString());
                     
                     // Dados do curso
-                    aluno.setCurso_id(Curso.getSelectedIndex() + 1);
+                    aluno.setCurso_id(cmbCurso.getSelectedIndex() + 1);
 
                     // Data de nascimento
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
