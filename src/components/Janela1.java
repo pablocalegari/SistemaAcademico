@@ -343,14 +343,14 @@ public class Janela1 extends JFrame {
      lblSemestre.setBounds(marginX, 150, 60, labelH);
      panelNotas.add(lblSemestre);
 
-     JComboBox<String> cbSemestre = new JComboBox<>(new String[]{
-         "2020-1","2020-2","2021-1","2021-2",
-         "2022-1","2022-2","2023-1","2023-2",
-         "2024-1","2024-2","2025-1","2025-2"
-     });
-     cbSemestre.setSelectedItem("2020-1");
-     cbSemestre.setBounds(85, 147, 90, fieldH);
-     panelNotas.add(cbSemestre);
+     
+     JComboBox comboBox = new JComboBox();
+     comboBox.setModel(new DefaultComboBoxModel(new String[] {"2025-1", "2025-2", "2026-1", "2026-2"}));
+     comboBox.setBounds(75, 150, 94, 22);
+     panelNotas.add(comboBox);
+        tabbedPane.addTab("Boletim", null, new JPanel(), null);
+        
+     panelNotas.add(Semestre);
 
      JLabel lblNota = new JLabel("Nota");
      lblNota.setBounds(190, 150, 35, labelH);
@@ -371,7 +371,8 @@ public class Janela1 extends JFrame {
      txtMostraraFaltasDo.setEditable(false);
      txtMostraraFaltasDo.setBounds(412, 147, 128, 28);
      panelNotas.add(txtMostraraFaltasDo);
-        tabbedPane.addTab("Boletim", null, new JPanel(), null);
+     
+
     }
 
     class ApenasNumeros extends javax.swing.text.PlainDocument {
