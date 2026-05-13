@@ -211,28 +211,21 @@ public class Janela1 extends JFrame {
         JLabel lblCurso = new JLabel("Curso");
         lblCurso.setBounds(marginX, 30, 55, labelH);
         panelCurso.add(lblCurso);
-
-        JComboBox<String> cbCurso = new JComboBox<>(new String[]{
-            "Analise e Desenvolvimento de Sistemas",
-            "Ciência da Computação",
-            "Engenharia de Software",
-            "Sistemas de Informação",
-            "Redes de Computadores"
-        });
-        cbCurso.setSelectedIndex(0);
-        cbCurso.setBounds(90, 27, 450, fieldH);
-        panelCurso.add(cbCurso);
-
+        
+        JComboBox Curso = new JComboBox();
+        Curso.setModel(new DefaultComboBoxModel(new String[] {"Analise e Desenvolvimento de Sistema", "Engenharia", "Direito", "Medicina", "Arquitetura"}));
+        Curso.setBounds(90, 30, 455, 22);
+        panelCurso.add(Curso);
+        
         JLabel lblCampus = new JLabel("Campus");
         lblCampus.setBounds(marginX, 80, 55, labelH);
         panelCurso.add(lblCampus);
+        
+        JComboBox Campus = new JComboBox();
+        Campus.setModel(new DefaultComboBoxModel(new String[] {"Tatuapé", "Mooca", "Lapa", "Santana", "Centro"}));
+        Campus.setBounds(90, 80, 455, 22);
+        panelCurso.add(Campus);
 
-        JComboBox<String> cbCampus = new JComboBox<>(new String[]{
-            "Tatuapé", "Centro", "Santo André", "Campinas", "Sorocaba"
-        });
-        cbCampus.setSelectedItem("Tatuapé");
-        cbCampus.setBounds(90, 77, 450, fieldH);
-        panelCurso.add(cbCampus);
 
         JLabel lblPeriodo = new JLabel("Período");
         lblPeriodo.setBounds(marginX, 130, 55, labelH);
@@ -274,7 +267,7 @@ public class Janela1 extends JFrame {
                     aluno.setGenero(cbGenero.getSelectedItem().toString());
 
                     // Dados do curso
-                    aluno.setCurso_id(cbCurso.getSelectedIndex() + 1);
+                    aluno.setCurso_id(Curso.getSelectedIndex() + 1);
 
                     // Data de nascimento
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -296,6 +289,8 @@ public class Janela1 extends JFrame {
         SalvarAluno.setBounds(523, 298, 262, 69);       
 
         panelCurso.add(SalvarAluno);
+        
+
 
 
      // ── Aba Notas e Faltas ──
