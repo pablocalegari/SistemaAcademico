@@ -17,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.text.MaskFormatter;
+import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
 
 public class Janela1 extends JFrame {
 
@@ -65,13 +67,27 @@ public class Janela1 extends JFrame {
         JMenu mnAluno = new JMenu("Aluno");
         menuBar.add(mnAluno);
         
-
+        JMenuItem mntmNewMenuItem_3 = new JMenuItem("Salvar");
+        mntmNewMenuItem_3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+        mnAluno.add(mntmNewMenuItem_3);
         
-        mnAluno.add(new JMenuItem("Alterar"));
-        mnAluno.add(new JMenuItem("Consultar"));
-        mnAluno.add(new JMenuItem("Excluir"));
+        JMenuItem mntmNewMenuItem = new JMenuItem("Alterar");
+        mnAluno.add(mntmNewMenuItem);
+        
+        JMenuItem mntmNewMenuItem_1 = new JMenuItem("Consultar");
+        mnAluno.add(mntmNewMenuItem_1);
+        
+        JMenuItem mntmNewMenuItem_2 = new JMenuItem("Excluir");
+        mnAluno.add(mntmNewMenuItem_2);
         mnAluno.add(new JSeparator());
-        mnAluno.add(new JMenuItem("Sair"));
+        JMenuItem menuItem = new JMenuItem("Sair");
+        menuItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		System.exit(0);
+        	}
+        });
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.SHIFT_DOWN_MASK));
+        mnAluno.add(menuItem);
 
         JMenu mnNotasFaltas = new JMenu("Notas e Faltas");
         menuBar.add(mnNotasFaltas);
