@@ -200,6 +200,24 @@ public class Janela1 extends JFrame {
         });
         SalvarDados.setBounds(523, 298, 262, 69);
         panelDadosPessoais.add(SalvarDados);
+        
+        JButton btnNovo = new JButton("Novo");
+        btnNovo.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		txtRGM.setText(null);
+        		txtNome.setText(null);
+        		txtDataNascimento.setText(null);
+        		txtCPF.setText(null);
+        		txtEmail.setText(null);
+        		txtEndereco.setText(null);
+        		txtMunicipio.setText(null);
+        		cmbUF.setSelectedIndex(0);
+        		txtCelular.setText(null);
+        		cmbGenero.setSelectedIndex(0);
+        	}
+        });
+        btnNovo.setBounds(390, 328, 105, 39);
+        panelDadosPessoais.add(btnNovo);
 
         // ── Aba Curso ──
         JPanel panelCurso = new JPanel();
@@ -278,7 +296,7 @@ public class Janela1 extends JFrame {
                     JOptionPane.showMessageDialog(null, "Aluno salvo com sucesso!");
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage());
                     ex.printStackTrace();
                 }
         	}
@@ -287,6 +305,10 @@ public class Janela1 extends JFrame {
         SalvarAluno.setBounds(523, 298, 262, 69);       
 
         panelCurso.add(SalvarAluno);
+        
+        JButton btnNewButton = new JButton("New button");
+        btnNewButton.setBounds(347, 298, 89, 23);
+        panelCurso.add(btnNewButton);
         
 
 
