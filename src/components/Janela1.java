@@ -68,10 +68,47 @@ public class Janela1 extends JFrame {
         menuBar.add(mnAluno);
         
         JMenuItem mntmNewMenuItem_3 = new JMenuItem("Salvar");
+        mntmNewMenuItem_3.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        	}
+        });
         mntmNewMenuItem_3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
         mnAluno.add(mntmNewMenuItem_3);
         
         JMenuItem mntmNewMenuItem = new JMenuItem("Alterar");
+        mntmNewMenuItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+                    Aluno aluno = new Aluno();
+
+                    // Dados pessoais
+                    aluno.setRgm(txtRGM.getText());
+                    aluno.setNome(txtNome.getText());
+                    aluno.setCpf(txtCPF.getText());
+                    aluno.setEmail(txtEmail.getText());
+                    aluno.setEndereco(txtEndereco.getText());
+                    aluno.setMunicipio(txtMunicipio.getText());
+                    aluno.setUf(cmbUF.getSelectedItem().toString());
+                    aluno.setNumeroCelular(txtCelular.getText());
+                    aluno.setGenero(cmbGenero.getSelectedItem().toString());
+                    
+                    // Data de nascimento
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    aluno.setDataNascimento(sdf.parse(txtDataNascimento.getText()));
+
+                    // Altera no banco
+                    AlunoDAO dao = new AlunoDAO();
+                    dao.salvar(aluno);
+
+                    JOptionPane.showMessageDialog(null, "Aluno salvo com sucesso!");
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+        	}
+        });
         mnAluno.add(mntmNewMenuItem);
         
         JMenuItem mntmNewMenuItem_1 = new JMenuItem("Consultar");
