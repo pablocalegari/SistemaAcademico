@@ -25,8 +25,8 @@ public class AlunoDAO {
 
     public void salvar(Aluno aluno) throws Exception{
         try{
-            String sql = "INSERT INTO aluno(nome , sobrenome , rgm , cpf, data_nascimento, email, celular , endereco, curso_id, municipio, uf, genero)" +
-                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO aluno(nome , sobrenome , rgm , cpf, data_nascimento, email, celular , endereco, curso_id, municipio, uf, genero, periodo)" +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             // passa a query para executar no banco de dados
             preparedStatement = connection.prepareStatement(sql);
             // passando do tipo de Date do java.util para o tipo de Date do java.sql, que é o que o banco de dados aceita
@@ -45,7 +45,7 @@ public class AlunoDAO {
             preparedStatement.setString(10, aluno.getMunicipio());
             preparedStatement.setString(11, aluno.getUf());
             preparedStatement.setString(12, aluno.getGenero()); 
-
+            preparedStatement.setString(13, aluno.getPeriodo()); 
 
             // executando a query no banco
             preparedStatement.executeUpdate();
