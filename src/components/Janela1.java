@@ -37,6 +37,7 @@ public class Janela1 extends JFrame {
     private JComboBox<String> cmbGenero;
     private JTextField txtNota;
     private JTextField txtMostraraFaltasDo;
+    private JTextField txtSobrenome;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -168,8 +169,17 @@ public class Janela1 extends JFrame {
         panelDadosPessoais.add(lblNome);
 
         txtNome = new JTextField();
-        txtNome.setBounds(260, rowY[0], 505, fieldH);
+        txtNome.setBounds(260, 20, 145, 28);
         panelDadosPessoais.add(txtNome);
+        
+        JLabel lblSobrenome = new JLabel("Sobrenome");
+        lblSobrenome.setBounds(424, 27, 71, 14);
+        panelDadosPessoais.add(lblSobrenome);
+        
+        txtSobrenome = new JTextField();
+        txtSobrenome.setBounds(498, 20, 267, 28);
+        panelDadosPessoais.add(txtSobrenome);
+        txtSobrenome.setColumns(10);
 
         JLabel lblDataNasc = new JLabel("Data de Nascimento");
         lblDataNasc.setBounds(marginX, rowY[1] + 3, 135, labelH);
@@ -271,6 +281,8 @@ public class Janela1 extends JFrame {
         });
         btnNovo.setBounds(390, 328, 105, 39);
         panelDadosPessoais.add(btnNovo);
+        
+
 
         // ── Aba Curso ──
         JPanel panelCurso = new JPanel();

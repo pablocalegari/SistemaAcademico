@@ -5,6 +5,7 @@ import java.util.Date;
 public class Aluno {
     private String rgm;
     private String nome;
+    private String sobrenome;
     private int curso;
     private String cpf;
     private String numeroCelular;
@@ -14,16 +15,16 @@ public class Aluno {
     private String municipio;
     private String uf;
     private String genero;
-    private String campus;
     private String periodo;
    
     public Aluno() {
     }
 
-    public Aluno(String rgm, String nome, int curso_id, String cpf, String numeroCelular, String email, java.util.Date dataNascimento, String endereco, String municipio, String uf, String genero) {
+    public Aluno(String rgm, String nome, String sobrenome, int curso_id, String cpf, String numeroCelular, String email, java.util.Date dataNascimento, String endereco, String municipio, String uf, String genero, String periodo) {
 
         this.rgm = rgm;
         this.nome = nome;
+        this.sobrenome = sobrenome;
         this.curso = curso_id;
         this.cpf = cpf;
         this.numeroCelular = numeroCelular;
@@ -33,6 +34,7 @@ public class Aluno {
         this.municipio = municipio;
         this.uf = uf;
         this.genero = genero;
+        this.periodo = periodo;
     }
 
     public String getRgm() {
@@ -47,6 +49,13 @@ public class Aluno {
     }
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    
+    public String getSobrenome() {
+    	return sobrenome;
+    }
+    public void setSobrenome(String sobrenome) {
+    	this.sobrenome = sobrenome;
     }
 
     public int getCurso_id() {
@@ -109,5 +118,11 @@ public class Aluno {
     }
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+    public String getPeriodo() {
+        return periodo;
+    }
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
     }
 }

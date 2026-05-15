@@ -25,8 +25,8 @@ public class AlunoDAO {
 
     public void salvar(Aluno aluno) throws Exception{
         try{
-            String sql = "INSERT INTO aluno(nome , rgm , cpf, data_nascimento, email, celular , endereco, curso_id, municipio, uf, genero)" +
-                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO aluno(nome , sobrenome , rgm , cpf, data_nascimento, email, celular , endereco, curso_id, municipio, uf, genero)" +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             // passa a query para executar no banco de dados
             preparedStatement = connection.prepareStatement(sql);
             // passando do tipo de Date do java.util para o tipo de Date do java.sql, que é o que o banco de dados aceita
@@ -34,16 +34,19 @@ public class AlunoDAO {
 
             // passando os valores do codigo, nome, e tipo para os (?, ?, ?) da query
             preparedStatement.setString(1, aluno.getNome());
-            preparedStatement.setString(2, aluno.getRgm());
-            preparedStatement.setString(3, aluno.getCpf());
-            preparedStatement.setDate(4, dataNascimento);
-            preparedStatement.setString(5, aluno.getEmail());
-            preparedStatement.setString(6, aluno.getNumeroCelular());
-            preparedStatement.setString(7, aluno.getEndereco());
-            preparedStatement.setInt(8, aluno.getCurso_id());
-            preparedStatement.setString(9, aluno.getMunicipio());
-            preparedStatement.setString(10, aluno.getUf());
-            preparedStatement.setString(11, aluno.getGenero()); 
+            preparedStatement.setString(2, aluno.getSobrenome()); 
+            preparedStatement.setString(3, aluno.getRgm());
+            preparedStatement.setString(4, aluno.getCpf());
+            preparedStatement.setDate(5, dataNascimento);
+            preparedStatement.setString(6, aluno.getEmail());
+            preparedStatement.setString(7, aluno.getNumeroCelular());
+            preparedStatement.setString(8, aluno.getEndereco());
+            preparedStatement.setInt(9, aluno.getCurso_id());
+            preparedStatement.setString(10, aluno.getMunicipio());
+            preparedStatement.setString(11, aluno.getUf());
+            preparedStatement.setString(12, aluno.getGenero()); 
+
+
             // executando a query no banco
             preparedStatement.executeUpdate();
         } catch (Exception e){
@@ -62,6 +65,7 @@ public class AlunoDAO {
             while(resultSet.next()){
                 // pegando os do banco de dados e passando para as variaveis
                 String nome = resultSet.getString("nome");
+                String sobrenome = resultSet.getString("sobrenome");
                 String rgm = resultSet.getString("rgm");
                 String cpf = resultSet.getString("cpf");
                 Date dataNascimento = resultSet.getDate("data_nascimento");
@@ -72,8 +76,9 @@ public class AlunoDAO {
                 String municipio = resultSet.getString("municipio");
                 String uf = resultSet.getString("uf");
                 String genero = resultSet.getString("genero");
+                String periodo = resultSet.getString("Periodo");
 
-                lista.add(new Aluno(rgm,nome,curso,cpf,numeroCelular,email,dataNascimento,endereco,municipio,uf,genero));
+                lista.add(new Aluno(rgm,nome,sobrenome,curso,cpf,numeroCelular,email,dataNascimento,endereco,municipio,uf,genero,periodo));
             }
             return lista;
         } catch (Exception e){
