@@ -38,6 +38,7 @@ public class Janela1 extends JFrame {
     private JTextField txtNota;
     private JTextField txtMostraraFaltasDo;
     private JTextField txtSobrenome;
+    private final ButtonGroup buttonGroup = new ButtonGroup();
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -86,6 +87,7 @@ public class Janela1 extends JFrame {
                     // Dados pessoais
                     aluno.setRgm(txtRGM.getText());
                     aluno.setNome(txtNome.getText());
+                    aluno.setSobrenome(txtSobrenome.getText());
                     aluno.setCpf(txtCPF.getText());
                     aluno.setEmail(txtEmail.getText());
                     aluno.setEndereco(txtEndereco.getText());
@@ -93,6 +95,7 @@ public class Janela1 extends JFrame {
                     aluno.setUf(cmbUF.getSelectedItem().toString());
                     aluno.setNumeroCelular(txtCelular.getText());
                     aluno.setGenero(cmbGenero.getSelectedItem().toString());
+                    aluno.setPeriodo(buttonGroup.getSelection().toString());
                     
                     // Data de nascimento
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -269,6 +272,7 @@ public class Janela1 extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		txtRGM.setText(null);
         		txtNome.setText(null);
+        		txtSobrenome.setText(null);
         		txtDataNascimento.setText(null);
         		txtCPF.setText(null);
         		txtEmail.setText(null);
@@ -313,22 +317,6 @@ public class Janela1 extends JFrame {
         panelCurso.add(lblPeriodo);
 
         ButtonGroup grupoPeriodo = new ButtonGroup();
-
-        JRadioButton rbMatutino = new JRadioButton("Matutino");
-        rbMatutino.setBounds(90, 127, 100, fieldH);
-        grupoPeriodo.add(rbMatutino);
-        panelCurso.add(rbMatutino);
-
-        JRadioButton rbVespertino = new JRadioButton("Vespertino");
-        rbVespertino.setBounds(200, 127, 110, fieldH);
-        grupoPeriodo.add(rbVespertino);
-        panelCurso.add(rbVespertino);
-
-        JRadioButton rbNoturno = new JRadioButton("Noturno");
-        rbNoturno.setBounds(320, 127, 90, fieldH);
-        rbNoturno.setSelected(true);
-        grupoPeriodo.add(rbNoturno);
-        panelCurso.add(rbNoturno);
         
         JButton SalvarAluno = new JButton("Salvar");
         SalvarAluno.addActionListener(new ActionListener() {
@@ -339,6 +327,7 @@ public class Janela1 extends JFrame {
                     // Dados pessoais
                     aluno.setRgm(txtRGM.getText());
                     aluno.setNome(txtNome.getText());
+                    aluno.setSobrenome(txtSobrenome.getText());
                     aluno.setCpf(txtCPF.getText());
                     aluno.setEmail(txtEmail.getText());
                     aluno.setEndereco(txtEndereco.getText());
@@ -346,6 +335,7 @@ public class Janela1 extends JFrame {
                     aluno.setUf(cmbUF.getSelectedItem().toString());
                     aluno.setNumeroCelular(txtCelular.getText());
                     aluno.setGenero(cmbGenero.getSelectedItem().toString());
+                    aluno.setPeriodo(buttonGroup.getSelection().toString());
                     
                     // Dados do curso
                     aluno.setCurso_id(cmbCurso.getSelectedIndex() + 1);
@@ -374,6 +364,21 @@ public class Janela1 extends JFrame {
         JButton btnNewButton = new JButton("New button");
         btnNewButton.setBounds(347, 298, 89, 23);
         panelCurso.add(btnNewButton);
+        
+        JRadioButton rdbtnVespertino = new JRadioButton("Vespertino");
+        buttonGroup.add(rdbtnVespertino);
+        rdbtnVespertino.setBounds(90, 130, 109, 23);
+        panelCurso.add(rdbtnVespertino);
+        
+        JRadioButton rdbtnMatutino = new JRadioButton("Matutino");
+        buttonGroup.add(rdbtnMatutino);
+        rdbtnMatutino.setBounds(201, 130, 109, 23);
+        panelCurso.add(rdbtnMatutino);
+        
+        JRadioButton rdbtnNoturno = new JRadioButton("Noturno");
+        buttonGroup.add(rdbtnNoturno);
+        rdbtnNoturno.setBounds(312, 130, 109, 23);
+        panelCurso.add(rdbtnNoturno);
         
 
 
