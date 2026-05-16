@@ -101,12 +101,6 @@ public class Janela1 extends JFrame {
         });
         mntmNewMenuItem_3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
         mnAluno.add(mntmNewMenuItem_3);
-        
-        JMenuItem mntmNewMenuItem_1 = new JMenuItem("Consultar");
-        mnAluno.add(mntmNewMenuItem_1);
-        
-        JMenuItem mntmNewMenuItem_2 = new JMenuItem("Excluir");
-        mnAluno.add(mntmNewMenuItem_2);
         mnAluno.add(new JSeparator());
         JMenuItem menuItem = new JMenuItem("Sair");
         menuItem.addActionListener(new ActionListener() {
@@ -114,17 +108,21 @@ public class Janela1 extends JFrame {
         		System.exit(0);
         	}
         });
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.SHIFT_DOWN_MASK));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
         mnAluno.add(menuItem);
-
-        JMenu mnNotasFaltas = new JMenu("Notas e Faltas");
-        menuBar.add(mnNotasFaltas);
-        mnNotasFaltas.add(new JMenuItem("Salvar"));
-        mnNotasFaltas.add(new JMenuItem("Alterar"));
-        mnNotasFaltas.add(new JMenuItem("Excluir"));
-        mnNotasFaltas.add(new JMenuItem("Consultar"));
-
-        menuBar.add(new JMenu("Ajuda"));
+        
+        JMenu mnAjuda = new JMenu("Ajuda");
+        menuBar.add(mnAjuda);
+        
+        JMenuItem mntmNewMenuItem = new JMenuItem("Sobre");
+        mntmNewMenuItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		JOptionPane.showMessageDialog(null, "Sistema feito para uso de gerenciamento escolar");
+        		
+        	}
+        });
+        mntmNewMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_DOWN_MASK));
+        mnAjuda.add(mntmNewMenuItem);
 
 
         contentPane = new JPanel();
