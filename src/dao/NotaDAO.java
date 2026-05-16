@@ -76,4 +76,28 @@ public class NotaDAO {
             throw new Exception(">> ERRO AO EXCLUIR ->" + e.getMessage());
         }
     }
+    public Nota consultarNota(int rgm, String disciplina, String semestre) throws Exception {
+        try {
+            String sql = "SELECT n.nota, n.faltas FROM nota n " +
+                         "INNER JOIN aluno a ON n.aluno_id = a.id " +
+                         "INNER JOIN disciplina d ON n.disciplina_id = d.id " +
+                         "WHERE a.rgm = ? AND d.nome = ? AND n.semestre = ?";
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, String.valueOf(rgm));
+            preparedStatement.setString(2, disciplina);
+            preparedStatement.setString(3, semestre);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                double nota = resultSet.getDouble("nota");
+                int faltas = resultSet.getInt("faltas");
+                return new Nota(nota, disciplina, faltas, semestre, rgm);
+            }
+            return null; // não encontrado
+
+        } catch (Exception e) {
+            throw new Exception(">> ERRO AO CONSULTAR NOTA -> " + e.getMessage());
+        }
+    }
 }

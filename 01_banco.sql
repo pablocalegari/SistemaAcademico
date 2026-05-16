@@ -65,7 +65,7 @@ INSERT INTO curso (nome, campus) VALUES
 
 -- Disciplinas
 INSERT INTO disciplina (nome, carga_horaria, curso_id) VALUES
-('POO', 80, 1),
+('Programação Orientada a Objetos', 80, 1),
 ('Banco de Dados', 80, 1),
 ('Engenharia de Software', 60, 1),
 ('Calculo I', 100, 2),

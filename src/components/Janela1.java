@@ -34,7 +34,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import dao.AlunoDAO;
+import dao.NotaDAO;
 import models.Aluno;
+import models.Nota;
+
 import java.awt.TextArea;
 
 public class Janela1 extends JFrame {
@@ -519,6 +522,7 @@ public class Janela1 extends JFrame {
          "Redes de Computadores",
          "Sistemas Operacionais"
      });
+     Disciplina.setModel(new DefaultComboBoxModel(new String[] {"Programação Orientada a Objetos", "Banco de Dados", "Engenharia de Software", "Calculo 1", "Direito Penal"}));
      Disciplina.setSelectedIndex(0);
      Disciplina.setBounds(90, 102, 450, fieldH);
      panelNotas.add(Disciplina);
@@ -598,6 +602,20 @@ public class Janela1 extends JFrame {
      			aluno = dao.consultarAluno(RGM);
      			txtNomeAluno.setText(aluno.getNome() + " " + aluno.getSobrenome()+ "\n");
      			txtCursoAluno.setText(aluno.getNomeCurso());
+     			
+     			NotaDAO notaDAO = new NotaDAO();
+     			String disciplinaSelecionada = Disciplina.getSelectedItem().toString();
+     			String semestreSelecionado = Semestre.getSelectedItem().toString();
+
+     			Nota nota = notaDAO.consultarNota(RGM, disciplinaSelecionada, semestreSelecionado);
+
+     			if (nota != null) {
+     			    txtNota.setText(String.valueOf(nota.getNota()));
+     			    txtMostraraFaltasDo.setText(String.valueOf(nota.getFalta()));
+     			} else {
+     			    txtNota.setText("Sem registro");
+     			    txtMostraraFaltasDo.setText("Sem registro");
+     			}
     	     	
     			} catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex.getMessage());
