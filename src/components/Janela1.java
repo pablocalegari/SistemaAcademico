@@ -582,17 +582,15 @@ public class Janela1 extends JFrame {
      
      txtNota = new JTextField("Mostrara a nota do aluno");
      txtNota.setForeground(Color.BLACK);
-     txtNota.setEditable(false);
      txtNota.setBounds(229, 147, 128, 28);
      panelNotas.add(txtNota);
      
      txtMostraraFaltasDo = new JTextField("Mostrara Faltas do aluno");
      txtMostraraFaltasDo.setForeground(Color.BLACK);
-     txtMostraraFaltasDo.setEditable(false);
      txtMostraraFaltasDo.setBounds(412, 147, 128, 28);
      panelNotas.add(txtMostraraFaltasDo);
      
-     JButton btnConsultar = new JButton("Consultar");
+     JButton btnConsultar = new JButton("Consultar Aluno");
      btnConsultar.addActionListener(new ActionListener() {
      	public void actionPerformed(ActionEvent e) {
      		try {
@@ -612,21 +610,8 @@ public class Janela1 extends JFrame {
      		        Disciplina.addItem(d);
      		    }
      			
-     			String disciplinaSelecionada = Disciplina.getSelectedItem().toString();
-     			String semestreSelecionado = Semestre.getSelectedItem().toString();
-
-     			
-     			
-     			Nota nota = notaDAO.consultarNota(RGM, disciplinaSelecionada, semestreSelecionado);
-
-     			if (nota != null) {
-     			    txtNota.setText(String.valueOf(nota.getNota()));
-     			    txtMostraraFaltasDo.setText(String.valueOf(nota.getFalta()));
-     			} else {
-     			    txtNota.setText("Sem registro");
-     			    txtMostraraFaltasDo.setText("Sem registro");
-     			}
-     			
+                txtNota.setText("");
+                txtMostraraFaltasDo.setText("");
     	 
     			} catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex.getMessage());
@@ -634,8 +619,84 @@ public class Janela1 extends JFrame {
             }
      	}
      });
-     btnConsultar.setBounds(573, 150, 166, 28);
+     btnConsultar.setBounds(10, 182, 202, 38);
      panelNotas.add(btnConsultar);
+     
+     // Botão que altera a a nota
+     JButton btnSalvarNota = new JButton("Salvar Nota");
+     btnSalvarNota.addActionListener(new ActionListener() {
+     	public void actionPerformed(ActionEvent e) {
+     		 try {
+                 int RGM = Integer.parseInt(txtRGMNotas.getText().trim());
+                 String disciplinaSelecionada = Disciplina.getSelectedItem().toString();
+                 String semestreSelecionado = Semestre.getSelectedItem().toString();
+                 double novaNota = Double.parseDouble(txtNota.getText().trim());
+
+                 NotaDAO notaDAO = new NotaDAO();
+                 notaDAO.atualizarNota(RGM, disciplinaSelecionada, semestreSelecionado, novaNota);
+
+                 JOptionPane.showMessageDialog(null, "Nota atualizada com sucesso!");
+             } catch (Exception ex) {
+                 JOptionPane.showMessageDialog(null, "Erro ao atualizar nota: " + ex.getMessage());
+                 ex.printStackTrace();
+             }
+     	}
+     });
+     
+     
+     btnSalvarNota.setBounds(229, 182, 128, 39);
+     panelNotas.add(btnSalvarNota);
+     
+     // Botão que salva a falta
+     JButton btnSalvarFalta = new JButton("Salvar Falta");
+     btnSalvarFalta.addActionListener(new ActionListener() {
+     	public void actionPerformed(ActionEvent e) {
+     		 try {
+                 int RGM = Integer.parseInt(txtRGMNotas.getText().trim());
+                 String disciplinaSelecionada = Disciplina.getSelectedItem().toString();
+                 String semestreSelecionado = Semestre.getSelectedItem().toString();
+                 int novaFalta = Integer.parseInt(txtMostraraFaltasDo.getText().trim());
+
+                 NotaDAO notaDAO = new NotaDAO();
+                 notaDAO.atualizarFalta(RGM, disciplinaSelecionada, semestreSelecionado, novaFalta);
+
+                 JOptionPane.showMessageDialog(null, "Falta atualizada com sucesso!");
+             } catch (Exception ex) {
+                 JOptionPane.showMessageDialog(null, "Erro ao atualizar falta: " + ex.getMessage());
+                 ex.printStackTrace();
+             }
+     	}
+     });
+     btnSalvarFalta.setBounds(412, 183, 128, 39);
+     panelNotas.add(btnSalvarFalta);
+     
+     JButton btnNewButton_1 = new JButton("Consultar Nota");
+     btnNewButton_1.addActionListener(new ActionListener() {
+     	public void actionPerformed(ActionEvent e) {
+     		 try {
+                 int RGM = Integer.parseInt(txtRGMNotas.getText().trim());
+                 String disciplinaSelecionada = Disciplina.getSelectedItem().toString();
+                 String semestreSelecionado = Semestre.getSelectedItem().toString();
+
+                 NotaDAO notaDAO = new NotaDAO();
+                 Nota nota = notaDAO.consultarNota(RGM, disciplinaSelecionada, semestreSelecionado);
+
+                 if (nota != null) {
+                     txtNota.setText(String.valueOf(nota.getNota()));
+                     txtMostraraFaltasDo.setText(String.valueOf(nota.getFalta()));
+                 } else {
+                     txtNota.setText("Sem registro");
+                     txtMostraraFaltasDo.setText("Sem registro");
+                 }
+
+             } catch (Exception ex) {
+                 JOptionPane.showMessageDialog(null, "Erro ao buscar nota: " + ex.getMessage());
+                 ex.printStackTrace();
+             }
+     	}
+     });
+     btnNewButton_1.setBounds(567, 142, 120, 39);
+     panelNotas.add(btnNewButton_1);
      
      JPanel panelLista = new JPanel();
      panelLista.setLayout(null);

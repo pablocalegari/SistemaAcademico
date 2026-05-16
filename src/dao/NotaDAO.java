@@ -118,4 +118,40 @@ public class NotaDAO {
             throw new Exception(">> ERRO AO LISTAR DISCIPLINAS -> " + e.getMessage());
         }
     }
+    
+    public void atualizarNota(int rgm, String disciplina, String semestre, double novaNota) throws Exception {
+        try {
+            String sql = "UPDATE nota n " +
+                         "INNER JOIN aluno a ON n.aluno_id = a.id " +
+                         "INNER JOIN disciplina d ON n.disciplina_id = d.id " +
+                         "SET n.nota = ? " +
+                         "WHERE a.rgm = ? AND d.nome = ? AND n.semestre = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setDouble(1, novaNota);
+            preparedStatement.setString(2, String.valueOf(rgm));
+            preparedStatement.setString(3, disciplina);
+            preparedStatement.setString(4, semestre);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw new Exception(">> ERRO AO ATUALIZAR NOTA -> " + e.getMessage());
+        }
+    }
+
+    public void atualizarFalta(int rgm, String disciplina, String semestre, int novaFalta) throws Exception {
+        try {
+            String sql = "UPDATE nota n " +
+                         "INNER JOIN aluno a ON n.aluno_id = a.id " +
+                         "INNER JOIN disciplina d ON n.disciplina_id = d.id " +
+                         "SET n.faltas = ? " +
+                         "WHERE a.rgm = ? AND d.nome = ? AND n.semestre = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, novaFalta);
+            preparedStatement.setString(2, String.valueOf(rgm));
+            preparedStatement.setString(3, disciplina);
+            preparedStatement.setString(4, semestre);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw new Exception(">> ERRO AO ATUALIZAR FALTA -> " + e.getMessage());
+        }
+    }
 }
