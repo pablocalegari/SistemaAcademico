@@ -59,6 +59,7 @@ public class Janela1 extends JFrame {
     private JTextField txtSobrenome;
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private JTextField txtRGMBoletim;
+    private JTextField txtRGMNotas;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -489,7 +490,6 @@ public class Janela1 extends JFrame {
      panelNotas.add(lblRGMNotas);
 
      JTextField txtRGMNotas = new JTextField();
-     txtRGMNotas = new JFormattedTextField(new MaskFormatter("#####"));
      txtRGMNotas.setBounds(60, 17, 120, fieldH);
      panelNotas.add(txtRGMNotas);
 
@@ -537,36 +537,33 @@ public class Janela1 extends JFrame {
         tabbedPane.addTab("Boletim", null, panelBoletim, null);
         panelBoletim.setLayout(null);
         
-        JLabel lblAlunos = new JLabel("Alunos:");
-        lblAlunos.setBounds(10, 11, 46, 14);
-        panelBoletim.add(lblAlunos);
-        
-        JTextArea textArea = new JTextArea();
-        textArea.setBounds(10, 36, 110, 372);
-        panelBoletim.add(textArea);
-        
         JTextArea textArea_2_1 = new JTextArea();
-        textArea_2_1.setBounds(615, 36, 137, 372);
+        textArea_2_1.setBounds(0, 91, 137, 328);
         panelBoletim.add(textArea_2_1);
         
         JLabel lblDisciplinas_1_1 = new JLabel("Notas");
-        lblDisciplinas_1_1.setBounds(615, 11, 110, 14);
+        lblDisciplinas_1_1.setBounds(0, 66, 110, 14);
         panelBoletim.add(lblDisciplinas_1_1);
         
         
 
         
         JLabel lblRGM_1 = new JLabel("RGM");
-        lblRGM_1.setBounds(130, 0, 40, 22);
+        lblRGM_1.setBounds(10, 0, 40, 22);
         panelBoletim.add(lblRGM_1);
         
         JButton btnNewButton = new JButton("Pesquisar");
-        btnNewButton.setBounds(260, 16, 120, 28);
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+
+        	}
+        });
+        btnNewButton.setBounds(140, 16, 120, 28);
         panelBoletim.add(btnNewButton);
         
         txtRGMBoletim = new JTextField();
         txtRGMBoletim = new JFormattedTextField(new MaskFormatter("#####"));
-        txtRGMBoletim.setBounds(130, 18, 120, 24);
+        txtRGMBoletim.setBounds(10, 18, 120, 24);
         panelBoletim.add(txtRGMBoletim);
         txtRGMBoletim.setColumns(10);
         
@@ -591,13 +588,25 @@ public class Janela1 extends JFrame {
      txtMostraraFaltasDo.setBounds(412, 147, 128, 28);
      panelNotas.add(txtMostraraFaltasDo);
      
-     JButton btnNewButton_1 = new JButton("Atualizar");
-     btnNewButton_1.addActionListener(new ActionListener() {
+     JButton btnConsultar = new JButton("Consultar");
+     btnConsultar.addActionListener(new ActionListener() {
      	public void actionPerformed(ActionEvent e) {
+     		try {
+     			
+     			AlunoDAO dao = new AlunoDAO();
+     			int RGM = Integer.parseInt(txtRGMNotas.getText());
+     			aluno = dao.consultarAluno(RGM);
+     			txtNomeAluno.setText(aluno.getNome() + " " + aluno.getSobrenome()+ "\n");
+     			txtCursoAluno.setText(aluno.getNomeCurso());
+    	     	
+    			} catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex.getMessage());
+                ex.printStackTrace();
+            }
      	}
      });
-     btnNewButton_1.setBounds(573, 150, 166, 28);
-     panelNotas.add(btnNewButton_1);
+     btnConsultar.setBounds(573, 150, 166, 28);
+     panelNotas.add(btnConsultar);
      
      JPanel panelLista = new JPanel();
      panelLista.setLayout(null);

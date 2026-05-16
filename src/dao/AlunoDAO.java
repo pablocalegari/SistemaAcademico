@@ -151,6 +151,29 @@ public class AlunoDAO {
         }
     }
     
+    public Aluno consultarAluno(int RGM) throws Exception {
+    	try {
+    	       String sql = "SELECT aluno.*, curso.nome AS nome_curso FROM aluno INNER JOIN"
+    	       		+ " curso ON aluno.curso_id = curso.id WHERE aluno.rgm = ?";
+    	       
+             preparedStatement = connection.prepareStatement(sql);
+             preparedStatement.setInt(1, RGM);
+             resultSet = preparedStatement.executeQuery();
+             
+             if(resultSet.next()) {
+                 String nome = resultSet.getString("nome");
+                 String sobrenome = resultSet.getString("sobrenome");
+                 int curso = resultSet.getInt("curso_id");
+                 String nomeCurso = resultSet.getString("nome_curso");
+                 aluno = new Aluno(null, nome, sobrenome, curso, null, null, null, null, null, null, null, null, null, nomeCurso);
+                 }
+             	return aluno;
+             
+        } catch (Exception e){
+            throw new Exception(">> ERRO AO DELETAR ->" + e.getMessage());
+      }
+    }
+    
     public void deletarAluno(Aluno aluno) throws Exception{
         try{
             String sql = "DELETE FROM aluno WHERE rgm = ?";
@@ -165,4 +188,4 @@ public class AlunoDAO {
             throw new Exception(">> ERRO AO DELETAR ->" + e.getMessage());
         }
     }
-}
+ }
