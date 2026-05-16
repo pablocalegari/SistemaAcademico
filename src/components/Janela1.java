@@ -482,7 +482,37 @@ public class Janela1 extends JFrame {
      Semestre.setModel(new DefaultComboBoxModel(new String[] {"2025-1", "2025-2", "2026-1", "2026-2"}));
      Semestre.setBounds(75, 150, 94, 22);
      panelNotas.add(Semestre);
-        tabbedPane.addTab("Boletim", null, new JPanel(), null);
+        JPanel panelBoletim = new JPanel();
+        tabbedPane.addTab("Boletim", null, panelBoletim, null);
+        panelBoletim.setLayout(null);
+        
+        JLabel lblAlunos = new JLabel("Alunos:");
+        lblAlunos.setBounds(10, 11, 46, 14);
+        panelBoletim.add(lblAlunos);
+        
+        JTextArea textArea = new JTextArea();
+        textArea.setBounds(10, 36, 110, 372);
+        panelBoletim.add(textArea);
+        
+        JTextArea textArea_2_1 = new JTextArea();
+        textArea_2_1.setBounds(615, 36, 137, 372);
+        panelBoletim.add(textArea_2_1);
+        
+        JLabel lblDisciplinas_1_1 = new JLabel("Notas");
+        lblDisciplinas_1_1.setBounds(615, 11, 110, 14);
+        panelBoletim.add(lblDisciplinas_1_1);
+        
+        JFormattedTextField txtRGM_1 = new JFormattedTextField((AbstractFormatter) null);
+        txtRGM_1.setBounds(130, 16, 120, 28);
+        panelBoletim.add(txtRGM_1);
+        
+        JLabel lblRGM_1 = new JLabel("RGM");
+        lblRGM_1.setBounds(130, 0, 40, 22);
+        panelBoletim.add(lblRGM_1);
+        
+        JButton btnNewButton = new JButton("Pesquisar");
+        btnNewButton.setBounds(260, 16, 120, 28);
+        panelBoletim.add(btnNewButton);
         
      JLabel lblNota = new JLabel("Nota");
      lblNota.setBounds(190, 150, 35, labelH);
