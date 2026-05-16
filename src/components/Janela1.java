@@ -4,13 +4,13 @@ package components;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -35,6 +35,7 @@ import javax.swing.text.MaskFormatter;
 
 import dao.AlunoDAO;
 import models.Aluno;
+import java.awt.TextArea;
 
 public class Janela1 extends JFrame {
 
@@ -598,21 +599,38 @@ public class Janela1 extends JFrame {
      lblAlunos_1.setBounds(10, 11, 46, 14);
      panelLista.add(lblAlunos_1);
      
-     JTextArea textArea_1 = new JTextArea();
-     textArea_1.setBounds(10, 36, 110, 372);
-     panelLista.add(textArea_1);
+     TextArea txtLista = new TextArea();
+     txtLista.setBounds(10, 33, 197, 375);
+     panelLista.add(txtLista);
+     
      
      JButton btnAtualizar = new JButton("Atualizar");
      btnAtualizar.addActionListener(new ActionListener() {
      	public void actionPerformed(ActionEvent e) {
-     		List<Leitor> lista = new ArrayList<Leitor>();
-     		dao = new AlunoDAO(); 
-     		
+     		try {
+	     		AlunoDAO dao = new AlunoDAO();
+	     		
+	     		List<Aluno> lista = new ArrayList<Aluno>();
+	     		lista = dao.listar();
+	     		
+				for(Aluno listar : lista) { 
+					txtLista.append("RGM do Aluno:" +listar.getRgm()+"\n");
+					txtLista.append("Nome do Aluno:" +listar.getNome() +listar.getSobrenome()+ "\n");
+					txtLista.append("Curso do Aluno:" +listar.getCurso_id()+"\n");
+					txtLista.append("Periodo do Aluno:" +listar.getPeriodo()+"\n");
+					txtLista.append("\n");
+			}
+     					
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao listar: " + ex.getMessage());
+                ex.printStackTrace();
+            }
      	}
      });
-     btnAtualizar.setBounds(130, 355, 98, 53);
+     btnAtualizar.setBounds(213, 355, 98, 53);
      panelLista.add(btnAtualizar);
      
+
 
     }
     }
