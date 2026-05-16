@@ -591,6 +591,14 @@ public class Janela1 extends JFrame {
      txtMostraraFaltasDo.setBounds(412, 147, 128, 28);
      panelNotas.add(txtMostraraFaltasDo);
      
+     JButton btnNewButton_1 = new JButton("Atualizar");
+     btnNewButton_1.addActionListener(new ActionListener() {
+     	public void actionPerformed(ActionEvent e) {
+     	}
+     });
+     btnNewButton_1.setBounds(573, 150, 166, 28);
+     panelNotas.add(btnNewButton_1);
+     
      JPanel panelLista = new JPanel();
      panelLista.setLayout(null);
      tabbedPane.addTab("Lista", null, panelLista, null);
@@ -616,7 +624,7 @@ public class Janela1 extends JFrame {
 				for(Aluno listar : lista) { 
 					txtLista.append("RGM do Aluno:" +listar.getRgm()+"\n");
 					txtLista.append("Nome do Aluno:" +listar.getNome() +listar.getSobrenome()+ "\n");
-					txtLista.append("Curso do Aluno:" +listar.getCurso_id()+"\n");
+					txtLista.append("Curso do Aluno:" +listar.getNomeCurso()+"\n");
 					txtLista.append("Periodo do Aluno:" +listar.getPeriodo()+"\n");
 					txtLista.append("\n");
 			}

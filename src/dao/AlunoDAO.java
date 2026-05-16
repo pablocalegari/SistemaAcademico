@@ -72,8 +72,7 @@ public class AlunoDAO {
     
     public List listar() throws Exception{
         List<Aluno> lista = new ArrayList<Aluno>();
-        String sql = "SELECT * FROM aluno;";
-        preparedStatement = connection.prepareStatement(sql);
+        String sql = "SELECT aluno.*, curso.nome AS nome_curso " + "FROM aluno " + "INNER JOIN curso ON aluno.curso_id = curso.id";
         try{
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
@@ -89,12 +88,14 @@ public class AlunoDAO {
                 String numeroCelular = resultSet.getString("celular");
                 String endereco =  resultSet.getString("endereco");
                 int curso = resultSet.getInt("curso_id");
+                String nomeCurso = resultSet.getString("nome_curso");
                 String municipio = resultSet.getString("municipio");
                 String uf = resultSet.getString("uf");
                 String genero = resultSet.getString("genero");
                 String periodo = resultSet.getString("Periodo");
 
-                lista.add(new Aluno(rgm,nome,sobrenome,curso,cpf,numeroCelular,email,dataNascimento,endereco,municipio,uf,genero,periodo));
+
+                lista.add(new Aluno(rgm,nome,sobrenome,curso,cpf,numeroCelular,email,dataNascimento,endereco,municipio,uf,genero,periodo,nomeCurso));
             }
             return lista;
         } catch (Exception e){
