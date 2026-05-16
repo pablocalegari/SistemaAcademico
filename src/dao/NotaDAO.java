@@ -137,6 +137,7 @@ public class NotaDAO {
         }
     }
 
+    // ATUALIZAR FALTAS
     public void atualizarFalta(int rgm, String disciplina, String semestre, int novaFalta) throws Exception {
         try {
             String sql = "UPDATE nota n " +
@@ -154,4 +155,35 @@ public class NotaDAO {
             throw new Exception(">> ERRO AO ATUALIZAR FALTA -> " + e.getMessage());
         }
     }
+    
+    	// Listagem do BOLETIM
+    public List<Nota> listarBoletim(int rgm) throws Exception {
+        List<Nota> lista = new ArrayList<>();
+        try {
+            String sql = "SELECT d.nome, n.semestre, n.nota, n.faltas " +
+                         "FROM nota n " +
+                         "INNER JOIN aluno a ON n.aluno_id = a.id " +
+                         "INNER JOIN disciplina d ON n.disciplina_id = d.id " +
+                         "WHERE a.rgm = ? " +
+                         "ORDER BY n.semestre, d.nome";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, String.valueOf(rgm));
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                lista.add(new Nota(
+                    resultSet.getDouble("nota"),
+                    resultSet.getString("nome"),
+                    resultSet.getInt("faltas"),
+                    resultSet.getString("semestre"),
+                    rgm
+                ));
+            }
+            return lista;
+        } catch (Exception e) {
+            throw new Exception(">> ERRO AO LISTAR BOLETIM -> " + e.getMessage());
+        }
+    }
+    
+    
 }

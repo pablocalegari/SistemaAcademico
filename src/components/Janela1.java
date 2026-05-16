@@ -39,6 +39,7 @@ import models.Aluno;
 import models.Nota;
 
 import java.awt.TextArea;
+import javax.swing.JTable;
 
 public class Janela1 extends JFrame {
 
@@ -63,6 +64,7 @@ public class Janela1 extends JFrame {
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private JTextField txtRGMBoletim;
     private JTextField txtRGMNotas;
+    private JTable tableBoletim;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -539,14 +541,6 @@ public class Janela1 extends JFrame {
         tabbedPane.addTab("Boletim", null, panelBoletim, null);
         panelBoletim.setLayout(null);
         
-        JTextArea textArea_2_1 = new JTextArea();
-        textArea_2_1.setBounds(0, 91, 137, 328);
-        panelBoletim.add(textArea_2_1);
-        
-        JLabel lblDisciplinas_1_1 = new JLabel("Notas");
-        lblDisciplinas_1_1.setBounds(0, 66, 110, 14);
-        panelBoletim.add(lblDisciplinas_1_1);
-        
         
 
         
@@ -554,20 +548,53 @@ public class Janela1 extends JFrame {
         lblRGM_1.setBounds(10, 0, 40, 22);
         panelBoletim.add(lblRGM_1);
         
-        JButton btnNewButton = new JButton("Pesquisar");
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnPesquisarBoletim = new JButton("Pesquisar");
+        btnPesquisarBoletim.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		btnPesquisarBoletim.addActionListener(new ActionListener() {
+        		    public void actionPerformed(ActionEvent e) {
+        		        try {
+        		            int RGM = Integer.parseInt(txtRGMBoletim.getText().trim());
+
+        		            NotaDAO notaDAO = new NotaDAO();
+        		            List<Nota> boletim = notaDAO.listarBoletim(RGM);
+
+        		            // colunas da tabela
+        		            String[] colunas = {"Disciplina", "Semestre", "Nota", "Faltas", "Situação"};
+        		            Object[][] dados = new Object[boletim.size()][5];
+
+        		            for (int i = 0; i < boletim.size(); i++) {
+        		                Nota n = boletim.get(i);
+        		                dados[i][0] = n.getDisciplina();
+        		                dados[i][1] = n.getSemestre();
+        		                dados[i][2] = n.getNota();
+        		                dados[i][3] = n.getFalta();
+        		                dados[i][4] = n.getNota() >= 5 ? "Aprovado" : "Reprovado";
+        		            }
+
+        		            tableBoletim.setModel(new javax.swing.table.DefaultTableModel(dados, colunas));
+
+        		        } catch (Exception ex) {
+        		            JOptionPane.showMessageDialog(null, "Erro ao pesquisar: " + ex.getMessage());
+        		            ex.printStackTrace();
+        		        }
+        		    }
+        		});
 
         	}
         });
-        btnNewButton.setBounds(140, 16, 120, 28);
-        panelBoletim.add(btnNewButton);
+        btnPesquisarBoletim.setBounds(140, 16, 120, 28);
+        panelBoletim.add(btnPesquisarBoletim);
         
         txtRGMBoletim = new JTextField();
         txtRGMBoletim = new JFormattedTextField(new MaskFormatter("#####"));
         txtRGMBoletim.setBounds(10, 18, 120, 24);
         panelBoletim.add(txtRGMBoletim);
         txtRGMBoletim.setColumns(10);
+        
+        tableBoletim = new JTable();
+        tableBoletim.setBounds(10, 55, 765, 353);
+        panelBoletim.add(tableBoletim);
         
         
      JLabel lblNota = new JLabel("Nota");
