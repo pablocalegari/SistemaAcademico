@@ -608,7 +608,7 @@ public class Janela1 extends JFrame {
      panelLista.add(lblAlunos_1);
      
      TextArea txtLista = new TextArea();
-     txtLista.setBounds(10, 33, 197, 375);
+     txtLista.setBounds(10, 33, 439, 375);
      panelLista.add(txtLista);
      
      
@@ -616,16 +616,17 @@ public class Janela1 extends JFrame {
      btnAtualizar.addActionListener(new ActionListener() {
      	public void actionPerformed(ActionEvent e) {
      		try {
+     			txtLista.setText(null);
 	     		AlunoDAO dao = new AlunoDAO();
 	     		
 	     		List<Aluno> lista = new ArrayList<Aluno>();
 	     		lista = dao.listar();
 	     		
 				for(Aluno listar : lista) { 
-					txtLista.append("RGM do Aluno:" +listar.getRgm()+"\n");
-					txtLista.append("Nome do Aluno:" +listar.getNome() +listar.getSobrenome()+ "\n");
-					txtLista.append("Curso do Aluno:" +listar.getNomeCurso()+"\n");
-					txtLista.append("Periodo do Aluno:" +listar.getPeriodo()+"\n");
+					txtLista.append("RGM do Aluno: " +listar.getRgm()+"\n");
+					txtLista.append("Nome do Aluno: " +listar.getNome() + " " + listar.getSobrenome()+ "\n");
+					txtLista.append("Curso do Aluno: " +listar.getNomeCurso()+"\n");
+					txtLista.append("Periodo do Aluno: " +listar.getPeriodo()+"\n");
 					txtLista.append("\n");
 			}
      					
@@ -635,7 +636,7 @@ public class Janela1 extends JFrame {
             }
      	}
      });
-     btnAtualizar.setBounds(213, 355, 98, 53);
+     btnAtualizar.setBounds(455, 355, 98, 53);
      panelLista.add(btnAtualizar);
      
 
