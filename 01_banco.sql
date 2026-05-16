@@ -8,6 +8,16 @@ CREATE TABLE curso(
     campus VARCHAR(100)
  );
  
+ CREATE TABLE disciplina(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    carga_horaria INT,
+    
+    curso_id INT,
+    FOREIGN KEY (curso_id) REFERENCES curso(id)
+        ON DELETE CASCADE
+);
+ 
  CREATE TABLE aluno (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	nome VARCHAR(100) NOT NULL,
@@ -31,13 +41,16 @@ CREATE TABLE curso(
 CREATE TABLE nota (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     aluno_id INT,
-    disciplina VARCHAR(100),
+    disciplina_id INT,
 	semestre VARCHAR(10),
     nota DECIMAL(4, 2) CHECK (nota BETWEEN 0 AND 10),
     faltas INT,
 	
     FOREIGN KEY(aluno_id) REFERENCES aluno(id)
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+    
+    FOREIGN KEY (disciplina_id) REFERENCES disciplina(id)
+		ON DELETE CASCADE
 );
 
 				-- dados de teste --
@@ -49,6 +62,14 @@ INSERT INTO curso (nome, campus) VALUES
 ('Direito', 'Lapa'),     
 ('Medicina', 'Santana'),  
 ('Arquitetura', 'Centro'); 
+
+-- Disciplinas
+INSERT INTO disciplina (nome, carga_horaria, curso_id) VALUES
+('POO', 80, 1),
+('Banco de Dados', 80, 1),
+('Engenharia de Software', 60, 1),
+('Calculo I', 100, 2),
+('Direito Penal', 70, 3);
 
 -- Alunos
 INSERT INTO aluno 
@@ -66,8 +87,8 @@ VALUES
 ('Neymar','da Silva', 'Prefiro não informar', '55667', '000.000.000-00', '2001-11-28', 'vemhexa@email.com', '(11)91234-5678', 'Av. Volta pro Barça', 'São Paulo', 'SP', 5, 'Matutino');
 
 -- Notas
-INSERT INTO nota (aluno_id, disciplina, semestre, nota, faltas) VALUES
-(1, 'POO', '2020-1', 8.5, 2),
-(1, 'Banco de Dados', '2020-1', 7.0, 3),
-(2, 'POO', '2020-1', 9.0, 1),
-(2, 'Algoritmos', '2020-1', 8.0, 0);
+INSERT INTO nota (aluno_id, disciplina_id, semestre, nota, faltas) VALUES
+(1, '1', '2020-1', 8.5, 2),
+(1, '3', '2020-1', 7.0, 3),
+(2, '2', '2020-1', 9.0, 1),
+(2, '4', '2020-1', 8.0, 0);
