@@ -235,7 +235,7 @@ public class Janela1 extends JFrame {
         		cmbGenero.setSelectedIndex(0);
         	}
         });
-        btnNovo.setBounds(390, 328, 105, 39);
+        btnNovo.setBounds(408, 378, 105, 39);
         panelDadosPessoais.add(btnNovo);
        
 
@@ -268,8 +268,8 @@ public class Janela1 extends JFrame {
         panelCurso.add(lblPeriodo);
         
         
-        JButton btnNewButton_1 = new JButton("Alterar");
-        btnNewButton_1.addActionListener(new ActionListener() {
+        JButton btnAlterarPessoais = new JButton("Alterar");
+        btnAlterarPessoais.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
             		try {
                         Aluno aluno = new Aluno();
@@ -307,15 +307,15 @@ public class Janela1 extends JFrame {
                     }
             	}
             });
-        btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        btnNewButton_1.setBounds(523, 378, 262, 41);
-        panelDadosPessoais.add(btnNewButton_1);
+        btnAlterarPessoais.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        btnAlterarPessoais.setBounds(523, 378, 262, 41);
+        panelDadosPessoais.add(btnAlterarPessoais);
         
         
         // SALVAR DADOS DO ALUNO
-        JButton SalvarDadosAluno = new JButton("Salvar");
-        SalvarDadosAluno.setFont(new Font("Tahoma", Font.PLAIN, 29));
-        SalvarDadosAluno.addActionListener(new ActionListener() {
+        JButton btnSalvarDadosPessoais = new JButton("Salvar");
+        btnSalvarDadosPessoais.setFont(new Font("Tahoma", Font.PLAIN, 29));
+        btnSalvarDadosPessoais.addActionListener(new ActionListener() {
                 	public void actionPerformed(ActionEvent e) {
                 		try {
                             Aluno aluno = new Aluno();
@@ -349,13 +349,13 @@ public class Janela1 extends JFrame {
         	       
         	}
         });
-        SalvarDadosAluno.setBounds(523, 298, 262, 69);
-        panelDadosPessoais.add(SalvarDadosAluno);
+        btnSalvarDadosPessoais.setBounds(523, 298, 262, 69);
+        panelDadosPessoais.add(btnSalvarDadosPessoais);
                 
         
         // SALVAR CURSO DO ALUNO
-        JButton SalvarDadosCurso = new JButton("Salvar");
-        SalvarDadosCurso.addActionListener(new ActionListener() {
+        JButton btnSalvarDadosCurso = new JButton("Salvar");
+        btnSalvarDadosCurso.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		try {
                     Aluno aluno = new Aluno();
@@ -379,14 +379,10 @@ public class Janela1 extends JFrame {
                 }
         	}
         });
-        SalvarDadosCurso.setFont(new Font("Tahoma", Font.PLAIN, 29));
-        SalvarDadosCurso.setBounds(523, 298, 262, 69);       
+        btnSalvarDadosCurso.setFont(new Font("Tahoma", Font.PLAIN, 29));
+        btnSalvarDadosCurso.setBounds(523, 298, 262, 69);       
 
-        panelCurso.add(SalvarDadosCurso);
-        
-        JButton btnNewButton = new JButton("New button");
-        btnNewButton.setBounds(347, 298, 89, 23);
-        panelCurso.add(btnNewButton);
+        panelCurso.add(btnSalvarDadosCurso);
         
         JRadioButton rdbtnVespertino = new JRadioButton("Vespertino");
         buttonGroup.add(rdbtnVespertino);
@@ -407,6 +403,35 @@ public class Janela1 extends JFrame {
         rdbtnNoturno.setBounds(312, 130, 109, 23);
         rdbtnNoturno.setActionCommand("Noturno");
         panelCurso.add(rdbtnNoturno);
+        
+        JButton btnAlterarCurso = new JButton("Alterar");
+        btnAlterarCurso.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+                    Aluno aluno = new Aluno();
+
+                    // Dados pessoais
+                    aluno.setRgm(txtRGM.getText());
+                    
+                    // Dados do curso
+                    aluno.setCurso_id(cmbCurso.getSelectedIndex() + 1);
+                    aluno.setPeriodo(buttonGroup.getSelection().getActionCommand());
+
+                    // Altera no banco
+                    AlunoDAO dao = new AlunoDAO();
+                    dao.atualizarCurso(aluno);
+
+                    JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao alterar: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+        	}
+        });
+        btnAlterarCurso.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        btnAlterarCurso.setBounds(523, 378, 262, 41);
+        panelCurso.add(btnAlterarCurso);
         
 
 

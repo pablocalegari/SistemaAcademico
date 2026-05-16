@@ -133,7 +133,25 @@ public class AlunoDAO {
         }
     }
     
+    public void atualizarCurso(Aluno aluno)throws Exception{
+        try{
+            String sql = "UPDATE aluno SET curso_id=?, periodo=? WHERE rgm=?;";
+            
+            // passa a query para executar no banco de dados
+            preparedStatement = connection.prepareStatement(sql);
 
+            // passando os valores do codigo, nome, e tipo para os (?, ?, ?) da query
+            preparedStatement.setInt(1, aluno.getCurso_id());
+            preparedStatement.setString(2, aluno.getPeriodo());
+            preparedStatement.setString(3, aluno.getRgm());
+            
+            // executando a query no banco
+            preparedStatement.executeUpdate();
+        } catch(Exception e){
+            throw new Exception(">> ERRO AO ALTERAR DADO -> " + e.getMessage());
+        }
+    }
+    
     public void deletar() throws Exception{
         try{
             String sql = "DELETE FROM aluno WHERE rgm = ?";
