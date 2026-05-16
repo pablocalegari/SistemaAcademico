@@ -1,30 +1,48 @@
 package components;
 
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JTabbedPane;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
+
 import dao.AlunoDAO;
 import models.Aluno;
-import java.text.SimpleDateFormat;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.text.MaskFormatter;
-import java.awt.event.KeyEvent;
-import java.awt.event.InputEvent;
 
 public class Janela1 extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-
+    
+    private Aluno aluno;
+    private AlunoDAO dao;
     private JTextField txtRGM;
     private JTextField txtNome;
     private JFormattedTextField txtDataNascimento;
@@ -39,6 +57,7 @@ public class Janela1 extends JFrame {
     private JTextField txtMostraraFaltasDo;
     private JTextField txtSobrenome;
     private final ButtonGroup buttonGroup = new ButtonGroup();
+    private JTextField txtRGMBoletim;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -219,6 +238,8 @@ public class Janela1 extends JFrame {
         cmbGenero.setBounds(80, rowY[5], 180, fieldH);
         panelDadosPessoais.add(cmbGenero);
         
+        
+        // Botão NOVO (só apaga tudo)
         JButton btnNovo = new JButton("Novo");
         btnNovo.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -271,9 +292,38 @@ public class Janela1 extends JFrame {
         JButton btnAlterarPessoais = new JButton("Alterar");
         btnAlterarPessoais.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		try {
+        			Aluno aluno = new Aluno();
 
-            	}
+                    // Dados pessoais
+                    aluno.setRgm(txtRGM.getText());
+                    aluno.setNome(txtNome.getText());
+                    aluno.setSobrenome(txtSobrenome.getText());
+                    aluno.setCpf(txtCPF.getText());
+                    aluno.setEmail(txtEmail.getText());
+                    aluno.setEndereco(txtEndereco.getText());
+                    aluno.setMunicipio(txtMunicipio.getText());
+                    aluno.setUf(cmbUF.getSelectedItem().toString());
+                    aluno.setNumeroCelular(txtCelular.getText());
+                    aluno.setGenero(cmbGenero.getSelectedItem().toString());
+
+                    // Data de nascimento
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    aluno.setDataNascimento(sdf.parse(txtDataNascimento.getText()));
+
+                    // Salva no banco
+                    AlunoDAO dao = new AlunoDAO();
+                    dao.atualizar(aluno);
+
+                    JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao alterar: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+               }
             });
+        
         btnAlterarPessoais.setFont(new Font("Tahoma", Font.PLAIN, 26));
         btnAlterarPessoais.setBounds(523, 378, 262, 41);
         panelDadosPessoais.add(btnAlterarPessoais);
@@ -285,7 +335,7 @@ public class Janela1 extends JFrame {
         btnSalvarDadosPessoais.addActionListener(new ActionListener() {
                 	public void actionPerformed(ActionEvent e) {
                 		try {
-                            Aluno aluno = new Aluno();
+                			Aluno aluno = new Aluno();
 
                             // Dados pessoais
                             aluno.setRgm(txtRGM.getText());
@@ -502,9 +552,8 @@ public class Janela1 extends JFrame {
         lblDisciplinas_1_1.setBounds(615, 11, 110, 14);
         panelBoletim.add(lblDisciplinas_1_1);
         
-        JFormattedTextField txtRGM_1 = new JFormattedTextField((AbstractFormatter) null);
-        txtRGM_1.setBounds(130, 16, 120, 28);
-        panelBoletim.add(txtRGM_1);
+        
+
         
         JLabel lblRGM_1 = new JLabel("RGM");
         lblRGM_1.setBounds(130, 0, 40, 22);
@@ -513,6 +562,13 @@ public class Janela1 extends JFrame {
         JButton btnNewButton = new JButton("Pesquisar");
         btnNewButton.setBounds(260, 16, 120, 28);
         panelBoletim.add(btnNewButton);
+        
+        txtRGMBoletim = new JTextField();
+        txtRGMBoletim = new JFormattedTextField(new MaskFormatter("#####"));
+        txtRGMBoletim.setBounds(130, 18, 120, 24);
+        panelBoletim.add(txtRGMBoletim);
+        txtRGMBoletim.setColumns(10);
+        
         
      JLabel lblNota = new JLabel("Nota");
      lblNota.setBounds(190, 150, 35, labelH);
@@ -533,6 +589,29 @@ public class Janela1 extends JFrame {
      txtMostraraFaltasDo.setEditable(false);
      txtMostraraFaltasDo.setBounds(412, 147, 128, 28);
      panelNotas.add(txtMostraraFaltasDo);
+     
+     JPanel panelLista = new JPanel();
+     panelLista.setLayout(null);
+     tabbedPane.addTab("Lista", null, panelLista, null);
+     
+     JLabel lblAlunos_1 = new JLabel("Alunos:");
+     lblAlunos_1.setBounds(10, 11, 46, 14);
+     panelLista.add(lblAlunos_1);
+     
+     JTextArea textArea_1 = new JTextArea();
+     textArea_1.setBounds(10, 36, 110, 372);
+     panelLista.add(textArea_1);
+     
+     JButton btnAtualizar = new JButton("Atualizar");
+     btnAtualizar.addActionListener(new ActionListener() {
+     	public void actionPerformed(ActionEvent e) {
+     		List<Leitor> lista = new ArrayList<Leitor>();
+     		dao = new AlunoDAO(); 
+     		
+     	}
+     });
+     btnAtualizar.setBounds(130, 355, 98, 53);
+     panelLista.add(btnAtualizar);
      
 
     }

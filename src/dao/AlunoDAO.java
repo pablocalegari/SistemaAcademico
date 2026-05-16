@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AlunoDAO {
     private Aluno aluno;
-    private Connection connection;
+    private Connection connection; // Conecta com o banco de dados
     private PreparedStatement preparedStatement; // deixa rodar querys
     private ResultSet resultSet; // seria a tabela ou o retorno da query
 
@@ -104,7 +104,7 @@ public class AlunoDAO {
 
     public void atualizar(Aluno aluno)throws Exception{
         try{
-            String sql = "UPDATE aluno SET nome=?, sobrenome=?, cpf=?, data_nascimento=?, email=?, celular=?, endereco=?, curso_id=?, municipio=?, uf=?, genero=?, periodo=? WHERE rgm=?;";
+            String sql = "UPDATE aluno SET nome=?, sobrenome=?, cpf=?, data_nascimento=?, email=?, celular=?, endereco=?, municipio=?, uf=?, genero=? WHERE rgm=?;";
             
             // passa a query para executar no banco de dados
             preparedStatement = connection.prepareStatement(sql);
@@ -119,12 +119,10 @@ public class AlunoDAO {
             preparedStatement.setString(5, aluno.getEmail());
             preparedStatement.setString(6, aluno.getNumeroCelular());
             preparedStatement.setString(7, aluno.getEndereco());
-            preparedStatement.setInt(8, aluno.getCurso_id());
-            preparedStatement.setString(9, aluno.getMunicipio());
-            preparedStatement.setString(10, aluno.getUf());
-            preparedStatement.setString(11, aluno.getGenero());
-            preparedStatement.setString(12, aluno.getPeriodo());
-            preparedStatement.setString(13, aluno.getRgm());
+            preparedStatement.setString(8, aluno.getMunicipio());
+            preparedStatement.setString(9, aluno.getUf());
+            preparedStatement.setString(10, aluno.getGenero());
+            preparedStatement.setString(11, aluno.getRgm());
             
             // executando a query no banco
             preparedStatement.executeUpdate();
