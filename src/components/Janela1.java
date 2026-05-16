@@ -55,7 +55,7 @@ public class Janela1 extends JFrame {
 
     public Janela1() throws Exception {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 826, 477);
+        setBounds(100, 100, 826, 529);
 
         //
         int labelH  = 22;
@@ -77,43 +77,6 @@ public class Janela1 extends JFrame {
         });
         mntmNewMenuItem_3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
         mnAluno.add(mntmNewMenuItem_3);
-        
-        JMenuItem mntmNewMenuItem = new JMenuItem("Alterar");
-        mntmNewMenuItem.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		try {
-                    Aluno aluno = new Aluno();
-
-                    // Dados pessoais
-                    aluno.setRgm(txtRGM.getText());
-                    aluno.setNome(txtNome.getText());
-                    aluno.setSobrenome(txtSobrenome.getText());
-                    aluno.setCpf(txtCPF.getText());
-                    aluno.setEmail(txtEmail.getText());
-                    aluno.setEndereco(txtEndereco.getText());
-                    aluno.setMunicipio(txtMunicipio.getText());
-                    aluno.setUf(cmbUF.getSelectedItem().toString());
-                    aluno.setNumeroCelular(txtCelular.getText());
-                    aluno.setGenero(cmbGenero.getSelectedItem().toString());
-                    aluno.setPeriodo(buttonGroup.getSelection().getActionCommand());
-                    
-                    // Data de nascimento
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    aluno.setDataNascimento(sdf.parse(txtDataNascimento.getText()));
-
-                    // Altera no banco
-                    AlunoDAO dao = new AlunoDAO();
-                    dao.salvar(aluno);
-
-                    JOptionPane.showMessageDialog(null, "Aluno salvo com sucesso!");
-
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage());
-                    ex.printStackTrace();
-                }
-        	}
-        });
-        mnAluno.add(mntmNewMenuItem);
         
         JMenuItem mntmNewMenuItem_1 = new JMenuItem("Consultar");
         mnAluno.add(mntmNewMenuItem_1);
@@ -146,7 +109,7 @@ public class Janela1 extends JFrame {
         contentPane.setLayout(null);
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        tabbedPane.setBounds(10, 10, 790, 410);
+        tabbedPane.setBounds(10, 10, 790, 447);
         contentPane.add(tabbedPane);
 
 
@@ -285,8 +248,7 @@ public class Janela1 extends JFrame {
         });
         btnNovo.setBounds(390, 328, 105, 39);
         panelDadosPessoais.add(btnNovo);
-        
-
+       
 
         // ── Aba Curso ──
         JPanel panelCurso = new JPanel();
@@ -315,8 +277,50 @@ public class Janela1 extends JFrame {
         JLabel lblPeriodo = new JLabel("Período");
         lblPeriodo.setBounds(marginX, 130, 55, labelH);
         panelCurso.add(lblPeriodo);
-
         
+        JButton btnNewButton_1 = new JButton("Alterar");
+        btnNewButton_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+            		try {
+                        Aluno aluno = new Aluno();
+
+                        // Dados pessoais
+                        aluno.setRgm(txtRGM.getText());
+                        aluno.setNome(txtNome.getText());
+                        aluno.setSobrenome(txtSobrenome.getText());
+                        aluno.setCpf(txtCPF.getText());
+                        aluno.setEmail(txtEmail.getText());
+                        aluno.setEndereco(txtEndereco.getText());
+                        aluno.setMunicipio(txtMunicipio.getText());
+                        aluno.setUf(cmbUF.getSelectedItem().toString());
+                        aluno.setNumeroCelular(txtCelular.getText());
+                        aluno.setGenero(cmbGenero.getSelectedItem().toString());
+                        aluno.setPeriodo(buttonGroup.getSelection().getActionCommand());
+                        
+                        // Dados do curso
+                        aluno.setCurso_id(cmbCurso.getSelectedIndex() + 1);
+
+                        
+                        // Data de nascimento
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        aluno.setDataNascimento(sdf.parse(txtDataNascimento.getText()));
+
+                        // Altera no banco
+                        AlunoDAO dao = new AlunoDAO();
+                        dao.atualizar(aluno);
+
+                        JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
+
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Erro ao alterar: " + ex.getMessage());
+                        ex.printStackTrace();
+                    }
+            	}
+            });
+        btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        btnNewButton_1.setBounds(523, 378, 262, 41);
+        panelDadosPessoais.add(btnNewButton_1);
+                
         JButton SalvarAluno = new JButton("Salvar");
         SalvarAluno.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {

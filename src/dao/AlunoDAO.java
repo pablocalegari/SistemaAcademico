@@ -86,13 +86,38 @@ public class AlunoDAO {
         }
     }
 
-    //public void atualizar()throws Exception{
-    //    try{
-    //        String sql = "UPDATE aluno SET blablabla WHERE rgm = ?;";
-    //    } catch(Exception e){
-    //        throw new Exception(">> ERRO AO ALTERAR DADO -> " + e.getMessage());
-    //    }
-    //}
+    public void atualizar(Aluno aluno)throws Exception{
+        try{
+            String sql = "UPDATE aluno SET " + "nome=?, sobrenome=?, cpf=?, data_nascimento=?, " + "email=?, celular=?, endereco=?, curso_id=?, " +
+                    "municipio=?, uf=?, genero=?, periodo=? " + "WHERE rgm=?;";
+            
+            // passa a query para executar no banco de dados
+            preparedStatement = connection.prepareStatement(sql);
+            // passando do tipo de Date do java.util para o tipo de Date do java.sql, que é o que o banco de dados aceita
+            java.sql.Date dataNascimento = new java.sql.Date(aluno.getDataNascimento().getTime());
+
+            // passando os valores do codigo, nome, e tipo para os (?, ?, ?) da query
+            preparedStatement.setString(1, aluno.getNome());
+            preparedStatement.setString(2, aluno.getSobrenome());
+            preparedStatement.setString(3, aluno.getCpf());
+            preparedStatement.setDate(4, dataNascimento);
+            preparedStatement.setString(5, aluno.getEmail());
+            preparedStatement.setString(6, aluno.getNumeroCelular());
+            preparedStatement.setString(7, aluno.getEndereco());
+            preparedStatement.setInt(8, aluno.getCurso_id());
+            preparedStatement.setString(9, aluno.getMunicipio());
+            preparedStatement.setString(10, aluno.getUf());
+            preparedStatement.setString(11, aluno.getGenero());
+            preparedStatement.setString(12, aluno.getPeriodo());
+            preparedStatement.setString(13, aluno.getRgm());
+            
+            // executando a query no banco
+            preparedStatement.executeUpdate();
+        } catch(Exception e){
+            throw new Exception(">> ERRO AO ALTERAR DADO -> " + e.getMessage());
+        }
+    }
+    
 
     public void deletar() throws Exception{
         try{
