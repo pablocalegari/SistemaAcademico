@@ -24,7 +24,7 @@ public class NotaDAO {
 
     public void salvar() throws Exception{
         try{
-            String sql = "INSERT INTO nota (aluno_id, disciplina, semestre, nota, faltas)" + 
+            String sql = "INSERT INTO nota (aluno_id, disciplina_id, semestre, nota, faltas)" + 
                         "values (?, ?, ?, ?, ?);";
 
             preparedStatement = connection.prepareStatement(sql);

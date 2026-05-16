@@ -65,6 +65,22 @@ public class AlunoDAO {
 
             // executando a query no banco
             preparedStatement.executeUpdate();
+            
+            // Deixa o aluno com 0 em notas e faltas por padrão para poder alterar com mais facilidade
+            String[] semestres = {"2025-1", "2025-2", "2026-1", "2026-2"};
+            String sqlNotas = "INSERT INTO nota (aluno_id, disciplina_id, semestre, nota, faltas) " +
+                              "SELECT a.id, d.id, ?, 0, 0 " +
+                              "FROM aluno a, disciplina d " +
+                              "WHERE a.rgm = ? AND d.curso_id = ?";
+
+            for (String semestre : semestres) {
+                preparedStatement = connection.prepareStatement(sqlNotas);
+                preparedStatement.setString(1, semestre);
+                preparedStatement.setString(2, aluno.getRgm());
+                preparedStatement.setInt(3, aluno.getCurso_id());
+                preparedStatement.executeUpdate();
+            }
+            
         } catch (Exception e){
             throw new Exception(">> ERRO AO SALVAR ->" + e.getMessage());
         }
