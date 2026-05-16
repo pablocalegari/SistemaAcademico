@@ -25,8 +25,8 @@ public class AlunoDAO {
 
     public void salvar(Aluno aluno) throws Exception{
         try{
-            String sql = "INSERT INTO aluno(nome , sobrenome , rgm , cpf, data_nascimento, email, celular , endereco, curso_id, municipio, uf, genero, periodo)" +
-                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO aluno(nome , sobrenome , rgm , cpf, data_nascimento, email, celular , endereco, municipio, uf, genero)" +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             // passa a query para executar no banco de dados
             preparedStatement = connection.prepareStatement(sql);
             // passando do tipo de Date do java.util para o tipo de Date do java.sql, que é o que o banco de dados aceita
@@ -41,11 +41,9 @@ public class AlunoDAO {
             preparedStatement.setString(6, aluno.getEmail());
             preparedStatement.setString(7, aluno.getNumeroCelular());
             preparedStatement.setString(8, aluno.getEndereco());
-            preparedStatement.setInt(9, aluno.getCurso_id());
-            preparedStatement.setString(10, aluno.getMunicipio());
-            preparedStatement.setString(11, aluno.getUf());
-            preparedStatement.setString(12, aluno.getGenero()); 
-            preparedStatement.setString(13, aluno.getPeriodo()); 
+            preparedStatement.setString(9, aluno.getMunicipio());
+            preparedStatement.setString(10, aluno.getUf());
+            preparedStatement.setString(11, aluno.getGenero()); 
 
             // executando a query no banco
             preparedStatement.executeUpdate();
@@ -54,6 +52,24 @@ public class AlunoDAO {
         }
     }
 
+    public void salvarCurso(Aluno aluno) throws Exception{
+        try{
+            String sql = "UPDATE aluno SET curso_id = ?, periodo = ? WHERE rgm = ?";
+            // passa a query para executar no banco de dados
+            preparedStatement = connection.prepareStatement(sql);
+
+            // passando os valores do codigo, nome, e tipo para os (?, ?, ?) da query
+            preparedStatement.setInt(1, aluno.getCurso_id());
+            preparedStatement.setString(2, aluno.getPeriodo()); 
+            preparedStatement.setString(3, aluno.getRgm());
+
+            // executando a query no banco
+            preparedStatement.executeUpdate();
+        } catch (Exception e){
+            throw new Exception(">> ERRO AO SALVAR ->" + e.getMessage());
+        }
+    }
+    
     public List listar() throws Exception{
         List<Aluno> lista = new ArrayList<Aluno>();
         String sql = "SELECT * FROM aluno;";
@@ -88,8 +104,7 @@ public class AlunoDAO {
 
     public void atualizar(Aluno aluno)throws Exception{
         try{
-            String sql = "UPDATE aluno SET " + "nome=?, sobrenome=?, cpf=?, data_nascimento=?, " + "email=?, celular=?, endereco=?, curso_id=?, " +
-                    "municipio=?, uf=?, genero=?, periodo=? " + "WHERE rgm=?;";
+            String sql = "UPDATE aluno SET nome=?, sobrenome=?, cpf=?, data_nascimento=?, email=?, celular=?, endereco=?, curso_id=?, municipio=?, uf=?, genero=?, periodo=? WHERE rgm=?;";
             
             // passa a query para executar no banco de dados
             preparedStatement = connection.prepareStatement(sql);
