@@ -64,7 +64,6 @@ public class Janela1 extends JFrame {
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private JTextField txtRGMBoletim;
     private JTextField txtRGMNotas;
-    private JTable tableBoletim;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -548,43 +547,7 @@ public class Janela1 extends JFrame {
         lblRGM_1.setBounds(10, 0, 40, 22);
         panelBoletim.add(lblRGM_1);
         
-        JButton btnPesquisarBoletim = new JButton("Pesquisar");
-        btnPesquisarBoletim.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		btnPesquisarBoletim.addActionListener(new ActionListener() {
-        		    public void actionPerformed(ActionEvent e) {
-        		        try {
-        		            int RGM = Integer.parseInt(txtRGMBoletim.getText().trim());
 
-        		            NotaDAO notaDAO = new NotaDAO();
-        		            List<Nota> boletim = notaDAO.listarBoletim(RGM);
-
-        		            // colunas da tabela
-        		            String[] colunas = {"Disciplina", "Semestre", "Nota", "Faltas", "Situação"};
-        		            Object[][] dados = new Object[boletim.size()][5];
-
-        		            for (int i = 0; i < boletim.size(); i++) {
-        		                Nota n = boletim.get(i);
-        		                dados[i][0] = n.getDisciplina();
-        		                dados[i][1] = n.getSemestre();
-        		                dados[i][2] = n.getNota();
-        		                dados[i][3] = n.getFalta();
-        		                dados[i][4] = n.getNota() >= 5 ? "Aprovado" : "Reprovado";
-        		            }
-
-        		            tableBoletim.setModel(new javax.swing.table.DefaultTableModel(dados, colunas));
-
-        		        } catch (Exception ex) {
-        		            JOptionPane.showMessageDialog(null, "Erro ao pesquisar: " + ex.getMessage());
-        		            ex.printStackTrace();
-        		        }
-        		    }
-        		});
-
-        	}
-        });
-        btnPesquisarBoletim.setBounds(140, 16, 120, 28);
-        panelBoletim.add(btnPesquisarBoletim);
         
         txtRGMBoletim = new JTextField();
         txtRGMBoletim = new JFormattedTextField(new MaskFormatter("#####"));
@@ -592,9 +555,37 @@ public class Janela1 extends JFrame {
         panelBoletim.add(txtRGMBoletim);
         txtRGMBoletim.setColumns(10);
         
-        tableBoletim = new JTable();
-        tableBoletim.setBounds(10, 55, 765, 353);
-        panelBoletim.add(tableBoletim);
+        TextArea textBoletim = new TextArea();
+        textBoletim.setBounds(10, 49, 765, 360);
+        panelBoletim.add(textBoletim);
+        
+        JButton btnPesquisarBoletim = new JButton("Pesquisar");
+        btnPesquisarBoletim.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int RGM = Integer.parseInt(txtRGMBoletim.getText().trim());
+
+                    NotaDAO notaDAO = new NotaDAO();
+                    List<Nota> boletim = notaDAO.listarBoletim(RGM);
+
+                    textBoletim.setText("");
+                    for (Nota n : boletim) {
+                        textBoletim.append("Disciplina: " + n.getDisciplina() + "\n");
+                        textBoletim.append("Semestre: " + n.getSemestre() + "\n");
+                        textBoletim.append("Nota: " + n.getNota() + "\n");
+                        textBoletim.append("Faltas: " + n.getFalta() + "\n");
+                        textBoletim.append("Situação: " + (n.getNota() >= 5 ? "Aprovado" : "Reprovado") + "\n");
+                        textBoletim.append("\n" + "------------------------------------" + "\n");
+                    }
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao pesquisar: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+            }
+        });
+        btnPesquisarBoletim.setBounds(140, 16, 120, 28);
+        panelBoletim.add(btnPesquisarBoletim);
         
         
      JLabel lblNota = new JLabel("Nota");
