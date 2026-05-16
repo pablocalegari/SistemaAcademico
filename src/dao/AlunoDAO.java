@@ -152,7 +152,7 @@ public class AlunoDAO {
         }
     }
     
-    public void deletar() throws Exception{
+    public void deletarAluno(Aluno aluno) throws Exception{
         try{
             String sql = "DELETE FROM aluno WHERE rgm = ?";
             preparedStatement = connection.prepareStatement(sql);

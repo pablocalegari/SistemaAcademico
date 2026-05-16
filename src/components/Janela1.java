@@ -271,40 +271,7 @@ public class Janela1 extends JFrame {
         JButton btnAlterarPessoais = new JButton("Alterar");
         btnAlterarPessoais.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-            		try {
-                        Aluno aluno = new Aluno();
 
-                        // Dados pessoais
-                        aluno.setRgm(txtRGM.getText());
-                        aluno.setNome(txtNome.getText());
-                        aluno.setSobrenome(txtSobrenome.getText());
-                        aluno.setCpf(txtCPF.getText());
-                        aluno.setEmail(txtEmail.getText());
-                        aluno.setEndereco(txtEndereco.getText());
-                        aluno.setMunicipio(txtMunicipio.getText());
-                        aluno.setUf(cmbUF.getSelectedItem().toString());
-                        aluno.setNumeroCelular(txtCelular.getText());
-                        aluno.setGenero(cmbGenero.getSelectedItem().toString());
-                        aluno.setPeriodo(buttonGroup.getSelection().getActionCommand());
-                        
-                        // Dados do curso
-                        aluno.setCurso_id(cmbCurso.getSelectedIndex() + 1);
-
-                        
-                        // Data de nascimento
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        aluno.setDataNascimento(sdf.parse(txtDataNascimento.getText()));
-
-                        // Altera no banco
-                        AlunoDAO dao = new AlunoDAO();
-                        dao.atualizar(aluno);
-
-                        JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
-
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "Erro ao alterar: " + ex.getMessage());
-                        ex.printStackTrace();
-                    }
             	}
             });
         btnAlterarPessoais.setFont(new Font("Tahoma", Font.PLAIN, 26));
@@ -351,6 +318,30 @@ public class Janela1 extends JFrame {
         });
         btnSalvarDadosPessoais.setBounds(523, 298, 262, 69);
         panelDadosPessoais.add(btnSalvarDadosPessoais);
+        
+        JButton btnExcluir = new JButton("Excluir");
+        btnExcluir.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+                    Aluno aluno = new Aluno();
+
+                    // Dados pessoais
+                    aluno.setRgm(txtRGM.getText());
+                    
+                    // Altera no banco
+                    AlunoDAO dao = new AlunoDAO();
+                    dao.deletarAluno(aluno);
+
+                    JOptionPane.showMessageDialog(null, "Aluno excluido com sucesso!");
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+        	}
+        });
+        btnExcluir.setBounds(286, 378, 105, 39);
+        panelDadosPessoais.add(btnExcluir);
                 
         
         // SALVAR CURSO DO ALUNO
