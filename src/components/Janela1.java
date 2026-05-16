@@ -492,7 +492,7 @@ public class Janela1 extends JFrame {
      lblRGMNotas.setBounds(marginX, 20, 35, labelH);
      panelNotas.add(lblRGMNotas);
 
-     JTextField txtRGMNotas = new JTextField();
+     txtRGMNotas = new JFormattedTextField(new MaskFormatter("#####"));
      txtRGMNotas.setBounds(60, 17, 120, fieldH);
      panelNotas.add(txtRGMNotas);
 
@@ -597,16 +597,26 @@ public class Janela1 extends JFrame {
      	public void actionPerformed(ActionEvent e) {
      		try {
      			
+     			// Atualiza as disciplinas para serem do curso
      			AlunoDAO dao = new AlunoDAO();
      			int RGM = Integer.parseInt(txtRGMNotas.getText());
      			aluno = dao.consultarAluno(RGM);
      			txtNomeAluno.setText(aluno.getNome() + " " + aluno.getSobrenome()+ "\n");
      			txtCursoAluno.setText(aluno.getNomeCurso());
      			
+     			// Atualiza as notas e faltas
      			NotaDAO notaDAO = new NotaDAO();
+     		    List<String> disciplinas = notaDAO.listarDisciplinas(aluno.getCurso_id());
+     		    Disciplina.removeAllItems();
+     		    for (String d : disciplinas) {
+     		        Disciplina.addItem(d);
+     		    }
+     			
      			String disciplinaSelecionada = Disciplina.getSelectedItem().toString();
      			String semestreSelecionado = Semestre.getSelectedItem().toString();
 
+     			
+     			
      			Nota nota = notaDAO.consultarNota(RGM, disciplinaSelecionada, semestreSelecionado);
 
      			if (nota != null) {
@@ -616,7 +626,8 @@ public class Janela1 extends JFrame {
      			    txtNota.setText("Sem registro");
      			    txtMostraraFaltasDo.setText("Sem registro");
      			}
-    	     	
+     			
+    	 
     			} catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex.getMessage());
                 ex.printStackTrace();

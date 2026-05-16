@@ -100,4 +100,22 @@ public class NotaDAO {
             throw new Exception(">> ERRO AO CONSULTAR NOTA -> " + e.getMessage());
         }
     }
+    
+    // Lista as disciplinas para seleção
+    public List<String> listarDisciplinas(int cursoId) throws Exception {
+        List<String> lista = new ArrayList<>();
+        try {
+            String sql = "SELECT nome FROM disciplina WHERE curso_id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, cursoId);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                lista.add(resultSet.getString("nome"));
+            }
+            return lista;
+        } catch (Exception e) {
+            throw new Exception(">> ERRO AO LISTAR DISCIPLINAS -> " + e.getMessage());
+        }
+    }
 }
