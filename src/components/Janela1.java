@@ -433,6 +433,7 @@ public class Janela1 extends JFrame {
         buttonGroup.add(rdbtnVespertino);
         rdbtnVespertino.setActionCommand("Vespertino");
         rdbtnVespertino.setBounds(90, 130, 109, 23);
+        rdbtnVespertino.setSelected(true);
         panelCurso.add(rdbtnVespertino);
         
         
@@ -574,7 +575,7 @@ public class Janela1 extends JFrame {
                         textBoletim.append("Semestre: " + n.getSemestre() + "\n");
                         textBoletim.append("Nota: " + n.getNota() + "\n");
                         textBoletim.append("Faltas: " + n.getFalta() + "\n");
-                        textBoletim.append("Situação: " + (n.getNota() >= 5 ? "Aprovado" : "Reprovado") + "\n");
+                        textBoletim.append("Situação: " + (n.getNota() >= 5 ? "Aprovado" : "") + "\n");
                         textBoletim.append("\n" + "------------------------------------" + "\n");
                     }
 
@@ -618,6 +619,8 @@ public class Janela1 extends JFrame {
      			txtNomeAluno.setText(aluno.getNome() + " " + aluno.getSobrenome()+ "\n");
      			txtCursoAluno.setText(aluno.getNomeCurso());
      			
+     			
+     			
      			// Atualiza as notas e faltas
      			NotaDAO notaDAO = new NotaDAO();
      		    List<String> disciplinas = notaDAO.listarDisciplinas(aluno.getCurso_id());
@@ -647,9 +650,15 @@ public class Janela1 extends JFrame {
                  String disciplinaSelecionada = Disciplina.getSelectedItem().toString();
                  String semestreSelecionado = Semestre.getSelectedItem().toString();
                  double novaNota = Double.parseDouble(txtNota.getText().trim());
+                 
+                 if (novaNota > 10 || novaNota < 0) {
+                	    JOptionPane.showMessageDialog(null, "Nota inválida! A nota deve ser entre 0 e 10.");
+                	    return;
+                	}
 
                  NotaDAO notaDAO = new NotaDAO();
                  notaDAO.atualizarNota(RGM, disciplinaSelecionada, semestreSelecionado, novaNota);
+                 
 
                  JOptionPane.showMessageDialog(null, "Nota atualizada com sucesso!");
              } catch (Exception ex) {
@@ -672,6 +681,10 @@ public class Janela1 extends JFrame {
                  String disciplinaSelecionada = Disciplina.getSelectedItem().toString();
                  String semestreSelecionado = Semestre.getSelectedItem().toString();
                  int novaFalta = Integer.parseInt(txtMostraraFaltasDo.getText().trim());
+                 if (novaFalta < 0) {
+                	    JOptionPane.showMessageDialog(null, "Falta inválida! Faltas devem se pelo menos 0.");
+                	    return;
+                	}
 
                  NotaDAO notaDAO = new NotaDAO();
                  notaDAO.atualizarFalta(RGM, disciplinaSelecionada, semestreSelecionado, novaFalta);
