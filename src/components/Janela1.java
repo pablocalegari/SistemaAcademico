@@ -47,7 +47,6 @@ public class Janela1 extends JFrame {
     private JPanel contentPane;
     
     private Aluno aluno;
-    private AlunoDAO dao;
     private JTextField txtRGM;
     private JTextField txtNome;
     private JFormattedTextField txtDataNascimento;
