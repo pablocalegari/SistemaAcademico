@@ -5,6 +5,7 @@ import java.util.Date;
 public class Aluno {
     private String rgm;
     private String nome;
+    private String sobrenome;
     private int curso;
     private String cpf;
     private String numeroCelular;
@@ -13,11 +14,20 @@ public class Aluno {
     private String endereco;
     private String municipio;
     private String uf;
+    private String genero;
+    private String periodo;
+    private String nomeCurso;
+   
+    public Aluno() {
+    }
 
-    public Aluno(String rgm, String nome, int curso, String cpf, String numeroCelular, String email, java.util.Date dataNascimento, String endereco, String municipio, String uf) {
+    public Aluno(String rgm, String nome, String sobrenome, int curso_id, String cpf, String numeroCelular, String email, java.util.Date dataNascimento,
+    		String endereco, String municipio, String uf, String genero, String periodo, String nomeCurso) {
+
         this.rgm = rgm;
         this.nome = nome;
-        this.curso = curso;
+        this.sobrenome = sobrenome;
+        this.curso = curso_id;
         this.cpf = cpf;
         this.numeroCelular = numeroCelular;
         this.email = email;
@@ -25,6 +35,9 @@ public class Aluno {
         this.endereco = endereco;
         this.municipio = municipio;
         this.uf = uf;
+        this.genero = genero;
+        this.periodo = periodo;
+        this.nomeCurso = nomeCurso;
     }
 
     public String getRgm() {
@@ -40,12 +53,19 @@ public class Aluno {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
+    public String getSobrenome() {
+    	return sobrenome;
+    }
+    public void setSobrenome(String sobrenome) {
+    	this.sobrenome = sobrenome;
+    }
 
-    public int getCurso() {
+    public int getCurso_id() {
         return curso;
     }
-    public void setCurso(int curso) {
-        this.curso = curso;
+    public void setCurso_id(int curso_id) {
+        this.curso = curso_id;
     }
 
     public String getCpf() {
@@ -95,5 +115,23 @@ public class Aluno {
     }
     public void setUf(String uf) {
         this.uf = uf;
+    }
+    public String getGenero() {
+        return genero;
+    }
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+    public String getPeriodo() {
+        return periodo;
+    }
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+    public String getNomeCurso() {
+        return nomeCurso;
+    }
+    public void setNomeCurso(String nomeCurso) {
+        this.nomeCurso = nomeCurso;
     }
 }
