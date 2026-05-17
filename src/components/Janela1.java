@@ -64,6 +64,7 @@ public class Janela1 extends JFrame {
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private JTextField txtRGMBoletim;
     private JTextField txtRGMNotas;
+    private JTextField txtRGMLista;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -97,6 +98,35 @@ public class Janela1 extends JFrame {
         JMenuItem mntmNewMenuItem_3 = new JMenuItem("Salvar");
         mntmNewMenuItem_3.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		try {
+        			Aluno aluno = new Aluno();
+
+                    // Dados pessoais
+                    aluno.setRgm(txtRGM.getText());
+                    aluno.setNome(txtNome.getText());
+                    aluno.setSobrenome(txtSobrenome.getText());
+                    aluno.setCpf(txtCPF.getText());
+                    aluno.setEmail(txtEmail.getText());
+                    aluno.setEndereco(txtEndereco.getText());
+                    aluno.setMunicipio(txtMunicipio.getText());
+                    aluno.setUf(cmbUF.getSelectedItem().toString());
+                    aluno.setNumeroCelular(txtCelular.getText());
+                    aluno.setGenero(cmbGenero.getSelectedItem().toString());
+
+                    // Data de nascimento
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    aluno.setDataNascimento(sdf.parse(txtDataNascimento.getText()));
+
+                    // Salva no banco
+                    AlunoDAO dao = new AlunoDAO();
+                    dao.salvar(aluno);
+
+                    JOptionPane.showMessageDialog(null, "Aluno salvo com sucesso!");
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage());
+                    ex.printStackTrace();
+              }
         		
         	}
         });
@@ -112,6 +142,9 @@ public class Janela1 extends JFrame {
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
         mnAluno.add(menuItem);
         
+        JMenu mnNewMenu = new JMenu("Curso");
+        menuBar.add(mnNewMenu);
+                
         JMenu mnAjuda = new JMenu("Ajuda");
         menuBar.add(mnAjuda);
         
@@ -372,30 +405,6 @@ public class Janela1 extends JFrame {
         });
         btnSalvarDadosPessoais.setBounds(523, 298, 262, 69);
         panelDadosPessoais.add(btnSalvarDadosPessoais);
-        
-        JButton btnExcluir = new JButton("Excluir");
-        btnExcluir.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		try {
-                    Aluno aluno = new Aluno();
-
-                    // Dados pessoais
-                    aluno.setRgm(txtRGM.getText());
-                    
-                    // Altera no banco
-                    AlunoDAO dao = new AlunoDAO();
-                    dao.deletarAluno(aluno);
-
-                    JOptionPane.showMessageDialog(null, "Aluno excluido com sucesso!");
-
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage());
-                    ex.printStackTrace();
-                }
-        	}
-        });
-        btnExcluir.setBounds(286, 378, 105, 39);
-        panelDadosPessoais.add(btnExcluir);
                 
         
         // SALVAR CURSO DO ALUNO
@@ -475,11 +484,39 @@ public class Janela1 extends JFrame {
                 }
         	}
         });
+        
+       // Botão MENU de SALVAR curso
         btnAlterarCurso.setFont(new Font("Tahoma", Font.PLAIN, 26));
         btnAlterarCurso.setBounds(523, 378, 262, 41);
         panelCurso.add(btnAlterarCurso);
         
+        JMenuItem mntmSalvarCurso = new JMenuItem("Salvar Curso");
+        mntmSalvarCurso.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+                    Aluno aluno = new Aluno();
+                    
+                    // RGM do aluno
+                    aluno.setRgm(txtRGM.getText());
+                    
+                    // Dados do curso
+                    aluno.setCurso_id(cmbCurso.getSelectedIndex() + 1);
+                    aluno.setPeriodo(buttonGroup.getSelection().getActionCommand());
 
+                    // Salva no banco
+                    AlunoDAO dao = new AlunoDAO();
+                    dao.salvarCurso(aluno);
+
+                    JOptionPane.showMessageDialog(null, "Curso do aluno salvo com sucesso!");
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+        	}
+        });
+        mntmSalvarCurso.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
+        mnNewMenu.add(mntmSalvarCurso);
 
 
      // ── Aba Notas e Faltas ──
@@ -766,6 +803,41 @@ public class Janela1 extends JFrame {
      });
      btnAtualizar.setBounds(455, 355, 98, 53);
      panelLista.add(btnAtualizar);
+     
+     JButton btnExcluir_1 = new JButton("Excluir");
+     btnExcluir_1.addActionListener(new ActionListener() {
+     	public void actionPerformed(ActionEvent e) {
+        		try {
+                    Aluno aluno = new Aluno();
+
+                    // Dados pessoais
+                    aluno.setRgm(txtRGMLista.getText());
+                    
+                    // Altera no banco
+                    AlunoDAO dao = new AlunoDAO();
+                    dao.deletarAluno(aluno);
+
+                    JOptionPane.showMessageDialog(null, "Aluno excluido com sucesso!");
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+     	}
+     });
+     btnExcluir_1.setBounds(670, 355, 105, 53);
+     panelLista.add(btnExcluir_1);
+
+     
+     JLabel lblRGM_2 = new JLabel("RGM");
+     lblRGM_2.setBounds(670, 268, 40, 22);
+     
+     panelLista.add(lblRGM_2);
+     
+     txtRGMLista = new JFormattedTextField(new MaskFormatter("#####"));
+     txtRGMLista.setBounds(670, 286, 109, 22);
+     panelLista.add(txtRGMLista);
+     txtRGMLista.setColumns(10);
      
 
 
