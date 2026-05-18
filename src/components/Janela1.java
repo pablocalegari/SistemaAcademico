@@ -40,6 +40,7 @@ import models.Nota;
 
 import java.awt.TextArea;
 import javax.swing.JTable;
+import java.awt.event.KeyAdapter;
 
 public class Janela1 extends JFrame {
 
@@ -634,11 +635,29 @@ public class Janela1 extends JFrame {
      panelNotas.add(lblFaltas);
      
      txtNota = new JTextField("Mostrara a nota do aluno");
+     txtNota.addKeyListener(new KeyAdapter() {
+     	@Override
+     	public void keyTyped(KeyEvent e) {
+     		String soNumero = "0123456789";
+     		if (!soNumero.contains(e.getKeyChar() + "")) {
+     			e.consume();
+     		}
+     	}
+     });
      txtNota.setForeground(Color.BLACK);
      txtNota.setBounds(229, 147, 128, 28);
      panelNotas.add(txtNota);
      
      txtMostraraFaltasDo = new JTextField("Mostrara Faltas do aluno");
+     txtMostraraFaltasDo.addKeyListener(new KeyAdapter() {
+     	@Override
+     	public void keyTyped(KeyEvent e) {
+     		String soNumero = "0123456789";
+     		if (!soNumero.contains(e.getKeyChar() + "")) {
+     			e.consume();
+     		}
+     	}
+     });
      txtMostraraFaltasDo.setForeground(Color.BLACK);
      txtMostraraFaltasDo.setBounds(412, 147, 128, 28);
      panelNotas.add(txtMostraraFaltasDo);
