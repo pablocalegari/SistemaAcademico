@@ -1,4 +1,4 @@
-package components;
+package br.com.exemplo.view;
 
 
 import java.awt.Color;
@@ -33,10 +33,10 @@ import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
-import dao.AlunoDAO;
-import dao.NotaDAO;
-import models.Aluno;
-import models.Nota;
+import br.com.exemplo.dao.AlunoDAO;
+import br.com.exemplo.dao.NotaDAO;
+import br.com.exemplo.model.Aluno;
+import br.com.exemplo.model.Nota;
 
 import java.awt.TextArea;
 import javax.swing.JTable;

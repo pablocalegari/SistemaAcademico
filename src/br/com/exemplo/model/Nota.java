@@ -1,4 +1,4 @@
-package models;
+package br.com.exemplo.model;
 
 public class Nota {
     private double nota;

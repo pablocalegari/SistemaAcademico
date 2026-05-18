@@ -1,13 +1,14 @@
-package dao;
+package br.com.exemplo.dao;
 
-import models.Aluno;
-import main.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import br.com.exemplo.model.Aluno;
+import br.com.exemplo.util.ConnectionFactory;
 
 public class AlunoDAO {
     private Aluno aluno;
