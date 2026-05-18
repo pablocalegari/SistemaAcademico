@@ -1,9 +1,9 @@
-package main;
+package br.com.exemplo.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import components.Janela1;
+import br.com.exemplo.view.Janela1;
 
 public class ConnectionFactory {
     public static Connection getConnection() throws Exception{
