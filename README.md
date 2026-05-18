@@ -98,7 +98,6 @@ sistema-academico/ ├── 01_banco.sql ├── README.md └── src/
 
 ## 👨‍💻 Autores
 
-- Douglas Leal  
 - Felipe Furlan  
 - Luiz Guilherme Romão  
 - Pablo Antonio Calegari  
