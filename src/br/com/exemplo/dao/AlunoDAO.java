@@ -205,4 +205,33 @@ public class AlunoDAO {
             throw new Exception(">> ERRO AO DELETAR ->" + e.getMessage());
         }
     }
+    
+    public Aluno consultarAlunoDadosPessoais(String rgm) throws Exception {
+        try {
+            String sql = "SELECT * FROM aluno WHERE rgm = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, rgm);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Aluno aluno = new Aluno();
+                aluno.setRgm(resultSet.getString("rgm"));
+                aluno.setNome(resultSet.getString("nome"));
+                aluno.setSobrenome(resultSet.getString("sobrenome"));
+                aluno.setCpf(resultSet.getString("cpf"));
+                aluno.setDataNascimento(resultSet.getDate("data_nascimento"));
+                aluno.setEmail(resultSet.getString("email"));
+                aluno.setNumeroCelular(resultSet.getString("celular"));
+                aluno.setEndereco(resultSet.getString("endereco"));
+                aluno.setMunicipio(resultSet.getString("municipio"));
+                aluno.setUf(resultSet.getString("uf"));
+                aluno.setGenero(resultSet.getString("genero"));
+                return aluno;
+            }
+            return null; // RGM não encontrado
+
+        } catch (Exception e) {
+            throw new Exception(">> ERRO AO CONSULTAR -> " + e.getMessage());
+        }
+    }
  }

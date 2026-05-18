@@ -270,7 +270,7 @@ public class Janela1 extends JFrame {
         panelDadosPessoais.add(lblGenero);
 
         cmbGenero = new JComboBox<>(new String[]{
-            "Selecione", "Masculino", "Feminino", "Não Binário", "Prefiro Não Informar"
+             "Masculino", "Feminino", "Não Binário", "Prefiro Não Informar"
         });
         cmbGenero.setBounds(80, rowY[5], 180, fieldH);
         panelDadosPessoais.add(cmbGenero);
@@ -405,6 +405,43 @@ public class Janela1 extends JFrame {
         });
         btnSalvarDadosPessoais.setBounds(523, 298, 262, 69);
         panelDadosPessoais.add(btnSalvarDadosPessoais);
+        
+        JButton btnConsultarAluno = new JButton("Consultar");
+        btnConsultarAluno.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		try {
+
+                    AlunoDAO dao = new AlunoDAO();
+                    Aluno encontrado = dao.consultarAlunoDadosPessoais(txtRGM.getText());
+                    
+                    if (encontrado == null) {
+                        JOptionPane.showMessageDialog(null, "Falha ao consultar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                        return; // para a execução aqui
+                    }
+                    
+                    // Preenche os campos com os dados encontrados
+                    txtNome.setText(encontrado.getNome());
+                    txtSobrenome.setText(encontrado.getSobrenome());
+                    txtCPF.setText(encontrado.getCpf());
+                    txtEmail.setText(encontrado.getEmail());
+                    txtEndereco.setText(encontrado.getEndereco());
+                    txtMunicipio.setText(encontrado.getMunicipio());
+                    txtCelular.setText(encontrado.getNumeroCelular());
+                    cmbUF.setSelectedItem(encontrado.getUf());
+                    cmbGenero.setSelectedItem(encontrado.getGenero());
+
+                    // Formata e preenche a data
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    txtDataNascimento.setText(sdf.format(encontrado.getDataNascimento()));
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao consultar: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+        	}
+        });
+        btnConsultarAluno.setBounds(408, 338, 105, 28);
+        panelDadosPessoais.add(btnConsultarAluno);
                 
         
         // SALVAR CURSO DO ALUNO
