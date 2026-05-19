@@ -675,7 +675,7 @@ public class Janela1 extends JFrame {
      txtNota.addKeyListener(new KeyAdapter() {
      	@Override
      	public void keyTyped(KeyEvent e) {
-     		String soNumero = "0123456789";
+     		String soNumero = "0123456789.";
      		if (!soNumero.contains(e.getKeyChar() + "")) {
      			e.consume();
      		}
