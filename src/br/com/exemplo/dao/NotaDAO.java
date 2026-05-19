@@ -77,7 +77,7 @@ public class NotaDAO {
             throw new Exception(">> ERRO AO EXCLUIR ->" + e.getMessage());
         }
     }
-    public Nota consultarNota(int rgm, String disciplina, String semestre) throws Exception {
+    public Nota consultarNota(String rgm, String disciplina, String semestre) throws Exception {
         try {
             String sql = "SELECT n.nota, n.faltas FROM nota n " +
                          "INNER JOIN aluno a ON n.aluno_id = a.id " +
@@ -85,7 +85,7 @@ public class NotaDAO {
                          "WHERE a.rgm = ? AND d.nome = ? AND n.semestre = ?";
 
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, String.valueOf(rgm));
+            preparedStatement.setString(1, rgm); 
             preparedStatement.setString(2, disciplina);
             preparedStatement.setString(3, semestre);
             resultSet = preparedStatement.executeQuery();
@@ -93,7 +93,7 @@ public class NotaDAO {
             if (resultSet.next()) {
                 double nota = resultSet.getDouble("nota");
                 int faltas = resultSet.getInt("faltas");
-                return new Nota(nota, disciplina, faltas, semestre, rgm);
+                return new Nota(nota, disciplina, faltas, semestre, Integer.parseInt(rgm));
             }
             return null; // não encontrado
 
@@ -120,7 +120,7 @@ public class NotaDAO {
         }
     }
     
-    public void atualizarNota(int rgm, String disciplina, String semestre, double novaNota) throws Exception {
+    public void atualizarNota(String rgm, String disciplina, String semestre, double novaNota) throws Exception {
         try {
             String sql = "UPDATE nota n " +
                          "INNER JOIN aluno a ON n.aluno_id = a.id " +
@@ -129,7 +129,7 @@ public class NotaDAO {
                          "WHERE a.rgm = ? AND d.nome = ? AND n.semestre = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setDouble(1, novaNota);
-            preparedStatement.setString(2, String.valueOf(rgm));
+            preparedStatement.setString(2, rgm);
             preparedStatement.setString(3, disciplina);
             preparedStatement.setString(4, semestre);
             preparedStatement.executeUpdate();
@@ -139,7 +139,7 @@ public class NotaDAO {
     }
 
     // ATUALIZAR FALTAS
-    public void atualizarFalta(int rgm, String disciplina, String semestre, int novaFalta) throws Exception {
+    public void atualizarFalta(String rgm, String disciplina, String semestre, int novaFalta) throws Exception {
         try {
             String sql = "UPDATE nota n " +
                          "INNER JOIN aluno a ON n.aluno_id = a.id " +
@@ -148,7 +148,7 @@ public class NotaDAO {
                          "WHERE a.rgm = ? AND d.nome = ? AND n.semestre = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, novaFalta);
-            preparedStatement.setString(2, String.valueOf(rgm));
+            preparedStatement.setString(2, rgm);
             preparedStatement.setString(3, disciplina);
             preparedStatement.setString(4, semestre);
             preparedStatement.executeUpdate();
@@ -158,7 +158,7 @@ public class NotaDAO {
     }
     
     	// Listagem do BOLETIM
-    public List<Nota> listarBoletim(int rgm) throws Exception {
+    public List<Nota> listarBoletim(String rgm) throws Exception {
         List<Nota> lista = new ArrayList<>();
         try {
             String sql = "SELECT d.nome, n.semestre, n.nota, n.faltas " +
@@ -168,7 +168,7 @@ public class NotaDAO {
                          "WHERE a.rgm = ? " +
                          "ORDER BY n.semestre, d.nome";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, String.valueOf(rgm));
+            preparedStatement.setString(1, rgm);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -177,7 +177,7 @@ public class NotaDAO {
                     resultSet.getString("nome"),
                     resultSet.getInt("faltas"),
                     resultSet.getString("semestre"),
-                    rgm
+                    Integer.parseInt(rgm)
                 ));
             }
             return lista;
