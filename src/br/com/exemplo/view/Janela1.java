@@ -638,7 +638,7 @@ public class Janela1 extends JFrame {
         btnPesquisarBoletim.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int RGM = Integer.parseInt(txtRGMBoletim.getText().trim());
+                	String RGM = txtRGMBoletim.getText().trim();
 
                     NotaDAO notaDAO = new NotaDAO();
                     List<Nota> boletim = notaDAO.listarBoletim(RGM);
@@ -738,7 +738,7 @@ public class Janela1 extends JFrame {
      btnSalvarNota.addActionListener(new ActionListener() {
      	public void actionPerformed(ActionEvent e) {
      		 try {
-                 int RGM = Integer.parseInt(txtRGMNotas.getText().trim());
+     			 String RGM = txtRGMNotas.getText().trim();
                  String disciplinaSelecionada = Disciplina.getSelectedItem().toString();
                  String semestreSelecionado = Semestre.getSelectedItem().toString();
                  double novaNota = Double.parseDouble(txtNota.getText().trim());
@@ -769,7 +769,7 @@ public class Janela1 extends JFrame {
      btnSalvarFalta.addActionListener(new ActionListener() {
      	public void actionPerformed(ActionEvent e) {
      		 try {
-                 int RGM = Integer.parseInt(txtRGMNotas.getText().trim());
+     		   	 String RGM = txtRGMNotas.getText().trim();
                  String disciplinaSelecionada = Disciplina.getSelectedItem().toString();
                  String semestreSelecionado = Semestre.getSelectedItem().toString();
                  int novaFalta = Integer.parseInt(txtMostraraFaltasDo.getText().trim());
@@ -795,7 +795,7 @@ public class Janela1 extends JFrame {
      btnNewButton_1.addActionListener(new ActionListener() {
      	public void actionPerformed(ActionEvent e) {
      		 try {
-                 int RGM = Integer.parseInt(txtRGMNotas.getText().trim());
+     			 String RGM = txtRGMNotas.getText().trim();
                  String disciplinaSelecionada = Disciplina.getSelectedItem().toString();
                  String semestreSelecionado = Semestre.getSelectedItem().toString();
 
